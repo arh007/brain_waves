@@ -1,0 +1,18 @@
+# Dependencies
+node_modules/
+package-lock.json
+
+# Environment & Sessions
+.env
+*.log
+cloudflared.exe
+*.tmp
+
+# IDE & OS
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# SQLite database (Note: can be seeded on fresh deploy)
+# database.sqlite

@@ -1,0 +1,22 @@
+{
+  "name": "brain-waves",
+  "version": "1.0.0",
+  "description": "BRAIN WAVES — Futuristic Digital Creative Agency & Interactive Platform",
+  "main": "server.js",
+  "type": "commonjs",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node server.js",
+    "seed": "node db/seed.js"
+  },
+  "keywords": [
+    "brain-waves",
+    "creative-agency",
+    "neon-futuristic",
+    "interactive-3d",
+    "cms",
+    "project-builder"
+  ],
+  "author": "BRAIN WAVES Studio",
+  "license": "MIT"
+}
