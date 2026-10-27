@@ -640,13 +640,15 @@
   <div class="toast-container" id="toast-container"></div>
 
   <!-- Scripts -->
+  <script src="js/default-data.js"></script>
+  <script src="js/client-storage.js"></script>
   <script src="js/admin-cms.js"></script>
   <script>
     // Enforce authentication on admin page
     const token = localStorage.getItem('bw_admin_token');
     const user = JSON.parse(localStorage.getItem('bw_admin_user') || 'null');
     if (!token || !user) {
-      window.location.href = '/login';
+      window.location.href = 'login.html';
     } else {
       AdminCMS.init();
     }

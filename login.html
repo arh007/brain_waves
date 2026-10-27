@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin Login — BRAIN WAVES Control Center</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2365F5FF'><path d='M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V18h-2v-1.07A6 6 0 0 1 7.07 13H8a4 4 0 0 0 7.93 0h.93a6 6 0 0 1-3.86 3.93z'/></svg>">
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/admin.css">
+  <style>
+    body {
+      min-height: 100vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 1.5rem;
+      background: radial-gradient(circle at center, #111429 0%, var(--bg-void) 80%);
+    }
+    .login-container {
+      width: 100%;
+      max-width: 440px;
+      background: var(--surface-modal);
+      border: 1px solid var(--border-active);
+      border-radius: var(--radius-xl);
+      padding: 2.75rem 2.25rem;
+      box-shadow: 0 0 50px rgba(101, 245, 255, 0.15), 0 25px 60px rgba(0,0,0,0.8);
+      position: relative;
+      z-index: 2;
+    }
+    .login-header-logo {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.65rem;
+      font-family: var(--font-display);
+      font-weight: 700;
+      font-size: 1.15rem;
+      margin-bottom: 1.5rem;
+    }
+    .badge-admin-tag {
+      font-family: var(--font-mono);
+      font-size: 0.72rem;
+      color: var(--neon-cyan);
+      background: rgba(101, 245, 255, 0.1);
+      border: 1px solid var(--border-active);
+      padding: 0.3rem 0.75rem;
+      border-radius: var(--radius-full);
+      display: inline-block;
+      margin-bottom: 0.85rem;
+    }
+    .quick-autofill-btn {
+      background: rgba(255, 255, 255, 0.04);
+      border: 1px dashed var(--border-subtle);
+      color: var(--text-muted);
+      border-radius: var(--radius-sm);
+      padding: 0.45rem 0.75rem;
+      font-size: 0.75rem;
+      font-family: var(--font-mono);
+      cursor: pointer;
+      width: 100%;
+      text-align: center;
+      margin-bottom: 1.5rem;
+      transition: all var(--transition-fast);
+    }
+    .quick-autofill-btn:hover {
+      color: var(--neon-cyan);
+      border-color: var(--neon-cyan);
+      background: rgba(101, 245, 255, 0.05);
+    }
+    .back-to-home {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.4rem;
+      color: var(--text-muted);
+      font-size: 0.825rem;
+      margin-top: 1.75rem;
+      transition: color var(--transition-fast);
+    }
+    .back-to-home:hover {
+      color: var(--neon-cyan);
+    }
+  </style>
+</head>
+<body>
+
+  <div class="bg-ambient-layer"></div>
+
+  <div class="login-container">
+    <div style="text-align: center;">
+      <a href="/" class="login-header-logo">
+        <div class="brand-icon-wrap" style="width:34px; height:34px;">✦</div>
+        <span>BRAIN WAVES</span>
+      </a>
+
+      <div>
+        <span class="badge-admin-tag">// RESTRICTED CONTROL ACCESS</span>
+        <h1 style="font-family:var(--font-display); font-size:1.65rem; font-weight:700; margin-bottom:0.35rem;">Admin Login</h1>
+        <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1.5rem;">
+          Enter credentials to manage inquiries, pipeline, and content.
+        </p>
+      </div>
+
+      <!-- Quick autofill helper button -->
+      <button type="button" class="quick-autofill-btn" id="autofill-btn" title="Click to fill default admin credentials">
+        ⚡ Click to Auto-fill Admin Credentials
+      </button>
+    </div>
+
+    <form id="standalone-login-form">
+      <div class="form-group">
+        <label for="login-email">Admin Email</label>
+        <input type="email" class="form-control" id="login-email" required value="admin@brainwaves.studio" placeholder="admin@brainwaves.studio">
+      </div>
+      <div class="form-group">
+        <label for="login-password">Password</label>
+        <input type="password" class="form-control" id="login-password" required value="admin123" placeholder="••••••••">
+      </div>
+      <button type="submit" class="btn-cta-primary" id="login-submit-btn" style="width:100%; justify-content:center; margin-top:0.5rem; font-size:0.95rem; padding:0.75rem;">
+        <span>Sign In to Control Center</span>
+        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+      </button>
+    </form>
+
+    <div style="text-align: center;">
+      <a href="/" class="back-to-home">
+        ← Return to Public Website
+      </a>
+    </div>
+  </div>
+
+  <!-- Toast notification -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/default-data.js"></script>
+  <script src="js/client-storage.js"></script>
+  <script>
+    // Autofill button
+    document.getElementById('autofill-btn').addEventListener('click', () => {
+      document.getElementById('login-email').value = 'admin@brainwaves.studio';
+      document.getElementById('login-password').value = 'admin123';
+      showToast('Kredensial admin default telah diisi otomatis.', 'info');
+    });
+
+    // Handle Login
+    document.getElementById('standalone-login-form').addEventListener('submit', async (e) => {
+      e.preventDefault();
+      const email = document.getElementById('login-email').value.trim();
+      const password = document.getElementById('login-password').value.trim();
+      const btn = document.getElementById('login-submit-btn');
+
+      btn.disabled = true;
+      btn.innerHTML = '<span>Authenticating...</span>';
+
+      try {
+        let authSuccess = false;
+        let authUser = null;
+        let authToken = null;
+
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+          const data = await res.json();
+          if (res.ok) {
+            authSuccess = true;
+            authToken = data.token;
+            authUser = data.user;
+          }
+        } catch (apiErr) {
+          // Fallback to client storage (e.g. GitHub Pages)
+        }
+
+        if (!authSuccess && window.ClientStorage) {
+          const staticAuth = ClientStorage.login(email, password);
+          if (staticAuth.success) {
+            authSuccess = true;
+            authToken = staticAuth.token;
+            authUser = staticAuth.user;
+          } else {
+            throw new Error(staticAuth.error);
+          }
+        }
+
+        if (!authSuccess) throw new Error('Email atau password salah.');
+
+        // Save token and user info
+        localStorage.setItem('bw_admin_token', authToken);
+        localStorage.setItem('bw_admin_user', JSON.stringify(authUser));
+
+        showToast(`Login berhasil! Mengalihkan ke Control Center...`, 'success');
+
+        setTimeout(() => {
+          window.location.href = 'admin.html';
+        }, 500);
+
+      } catch (err) {
+        showToast(err.message, 'danger');
+        btn.disabled = false;
+        btn.innerHTML = `<span>Sign In to Control Center</span> <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>`;
+      }
+    });
+
+    function showToast(message, type = 'info') {
+      const container = document.getElementById('toast-container');
+      if (!container) return;
+      const toast = document.createElement('div');
+      toast.className = `toast toast-${type}`;
+      toast.innerHTML = `<span style="color:var(--neon-cyan);">✦</span><span>${message}</span>`;
+      container.appendChild(toast);
+      setTimeout(() => {
+        toast.style.opacity = '0';
+        toast.style.transform = 'translateX(100%)';
+        setTimeout(() => toast.remove(), 300);
+      }, 4000);
+    }
+  </script>
+</body>
+</html>

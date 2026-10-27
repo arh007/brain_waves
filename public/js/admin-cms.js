@@ -16,7 +16,7 @@ const AdminCMS = (function() {
   let cachedTestimonials = [];
   let cachedInquiries = [];
 
-  // Centralized robust API client with auto 401 handling
+  // Centralized robust API client with auto 401 handling & static GitHub Pages fallback
   async function apiFetch(url, options = {}) {
     authToken = localStorage.getItem('bw_admin_token') || authToken;
     const headers = {
@@ -26,21 +26,119 @@ const AdminCMS = (function() {
     if (options.body && typeof options.body === 'string' && !headers['Content-Type']) {
       headers['Content-Type'] = 'application/json';
     }
-    const res = await fetch(url, { ...options, headers });
-    if (res.status === 401) {
-      localStorage.removeItem('bw_admin_token');
-      localStorage.removeItem('bw_admin_user');
-      showToast('Sesi login telah kedaluwarsa. Mengalihkan ke login...', 'danger');
-      setTimeout(() => {
-        if (window.location.pathname.includes('/admin')) {
-          window.location.href = '/login';
-        } else {
-          showLoginView();
-        }
-      }, 1000);
-      throw new Error('Unauthorized');
+
+    try {
+      const res = await fetch(url, { ...options, headers });
+      if (res.status === 401) {
+        localStorage.removeItem('bw_admin_token');
+        localStorage.removeItem('bw_admin_user');
+        showToast('Sesi login telah kedaluwarsa. Mengalihkan ke login...', 'danger');
+        setTimeout(() => {
+          if (window.location.pathname.includes('/admin')) {
+            window.location.href = 'login.html';
+          } else {
+            showLoginView();
+          }
+        }, 1000);
+        throw new Error('Unauthorized');
+      }
+      if (res.ok) return res;
+    } catch (netErr) {
+      // Network failed or 404 (e.g. on GitHub Pages)
     }
-    return res;
+
+    // Static fallback using ClientStorage (GitHub Pages Mode)
+    if (window.ClientStorage) {
+      const method = (options.method || 'GET').toUpperCase();
+      let payload = null;
+      if (options.body && typeof options.body === 'string') {
+        try { payload = JSON.parse(options.body); } catch(e){}
+      }
+
+      // Stats
+      if (url.includes('/api/admin/stats')) {
+        const p = ClientStorage.getProjects();
+        const s = ClientStorage.getServices();
+        return new Response(JSON.stringify({
+          stats: { inquiriesTotal: 0, inquiriesNew: 0, projectsTotal: p.length, servicesTotal: s.length },
+          recentInquiries: []
+        }), { status: 200, headers: { 'Content-Type': 'application/json' } });
+      }
+
+      // Projects
+      if (url.includes('/api/admin/projects')) {
+        const idMatch = url.match(/\/api\/admin\/projects\/(\d+)/);
+        if (idMatch && method === 'DELETE') {
+          ClientStorage.deleteProject(Number(idMatch[1]));
+          return new Response(JSON.stringify({ success: true, message: 'Proyek berhasil dihapus.' }), { status: 200 });
+        }
+        if (idMatch && (method === 'PUT' || method === 'POST')) {
+          ClientStorage.saveProject({ ...payload, id: Number(idMatch[1]) });
+          return new Response(JSON.stringify({ success: true, message: 'Proyek berhasil diperbarui.' }), { status: 200 });
+        }
+        if (method === 'POST') {
+          const saved = ClientStorage.saveProject(payload);
+          return new Response(JSON.stringify({ success: true, id: saved.id }), { status: 201 });
+        }
+        return new Response(JSON.stringify(ClientStorage.getProjects()), { status: 200 });
+      }
+
+      // Services
+      if (url.includes('/api/admin/services')) {
+        const idMatch = url.match(/\/api\/admin\/services\/(\d+)/);
+        if (idMatch && method === 'DELETE') {
+          ClientStorage.deleteService(Number(idMatch[1]));
+          return new Response(JSON.stringify({ success: true, message: 'Layanan berhasil dihapus.' }), { status: 200 });
+        }
+        if (idMatch && (method === 'PUT' || method === 'POST')) {
+          ClientStorage.saveService({ ...payload, id: Number(idMatch[1]) });
+          return new Response(JSON.stringify({ success: true }), { status: 200 });
+        }
+        if (method === 'POST') {
+          const saved = ClientStorage.saveService(payload);
+          return new Response(JSON.stringify({ success: true, id: saved.id }), { status: 201 });
+        }
+        return new Response(JSON.stringify(ClientStorage.getServices()), { status: 200 });
+      }
+
+      // Articles
+      if (url.includes('/api/admin/articles')) {
+        const idMatch = url.match(/\/api\/admin\/articles\/(\d+)/);
+        if (idMatch && method === 'DELETE') {
+          ClientStorage.deleteArticle(Number(idMatch[1]));
+          return new Response(JSON.stringify({ success: true, message: 'Artikel berhasil dihapus.' }), { status: 200 });
+        }
+        if (idMatch && (method === 'PUT' || method === 'POST')) {
+          ClientStorage.saveArticle({ ...payload, id: Number(idMatch[1]) });
+          return new Response(JSON.stringify({ success: true }), { status: 200 });
+        }
+        if (method === 'POST') {
+          const saved = ClientStorage.saveArticle(payload);
+          return new Response(JSON.stringify({ success: true, id: saved.id }), { status: 201 });
+        }
+        return new Response(JSON.stringify(ClientStorage.getArticles()), { status: 200 });
+      }
+
+      // Testimonials
+      if (url.includes('/api/admin/testimonials')) {
+        const idMatch = url.match(/\/api\/admin\/testimonials\/(\d+)/);
+        if (idMatch && method === 'DELETE') {
+          ClientStorage.deleteTestimonial(Number(idMatch[1]));
+          return new Response(JSON.stringify({ success: true, message: 'Testimonial berhasil dihapus.' }), { status: 200 });
+        }
+        if (idMatch && (method === 'PUT' || method === 'POST')) {
+          ClientStorage.saveTestimonial({ ...payload, id: Number(idMatch[1]) });
+          return new Response(JSON.stringify({ success: true }), { status: 200 });
+        }
+        if (method === 'POST') {
+          const saved = ClientStorage.saveTestimonial(payload);
+          return new Response(JSON.stringify({ success: true, id: saved.id }), { status: 201 });
+        }
+        return new Response(JSON.stringify(ClientStorage.getTestimonials()), { status: 200 });
+      }
+    }
+
+    throw new Error('Endpoint tidak dapat dihubungi.');
   }
 
   function init() {

@@ -94,10 +94,15 @@ const BrainWavesApp = (function() {
 
   // 1. Load Studio Settings
   async function loadSettings() {
+    let settings = null;
     try {
       const res = await fetch('/api/settings');
-      if (!res.ok) return;
-      const settings = await res.json();
+      if (res.ok) settings = await res.json();
+    } catch (e) {}
+    if (!settings && window.ClientStorage) {
+      settings = ClientStorage.getSettings();
+    }
+    if (!settings) return;
 
       if (settings.office_location) {
         document.querySelectorAll('.setting-val-location').forEach(el => el.textContent = settings.office_location);
@@ -138,7 +143,15 @@ const BrainWavesApp = (function() {
 
     try {
       const res = await fetch('/api/services');
-      allServices = await res.json();
+      if (res.ok) {
+        allServices = await res.json();
+      }
+    } catch (e) {}
+
+    if ((!allServices || !allServices.length) && window.ClientStorage) {
+      allServices = ClientStorage.getServices();
+    }
+    if (!Array.isArray(allServices)) allServices = [];
 
       grid.innerHTML = allServices.map(s => `
         <div class="service-card" data-service-id="${s.id}">
@@ -210,15 +223,22 @@ const BrainWavesApp = (function() {
 
     try {
       const res = await fetch(`/api/projects?category=${category}`);
-      allProjects = await res.json();
+      if (res.ok) {
+        allProjects = await res.json();
+      }
+    } catch (e) {}
 
-      renderProjectsGrid(allProjects);
-      bindFilterTabs();
-      bindSearch();
-
-    } catch (e) {
-      console.error('Failed to load projects', e);
+    if ((!allProjects || !allProjects.length) && window.ClientStorage) {
+      allProjects = ClientStorage.getProjects();
+      if (category !== 'all') {
+        allProjects = allProjects.filter(p => p.category_name?.toLowerCase().includes(category) || p.slug?.includes(category));
+      }
     }
+    if (!Array.isArray(allProjects)) allProjects = [];
+
+    renderProjectsGrid(allProjects);
+    bindFilterTabs();
+    bindSearch();
   }
 
   function renderProjectsGrid(projects) {
@@ -337,9 +357,16 @@ const BrainWavesApp = (function() {
     const grid = document.getElementById('articles-grid-container');
     if (!grid) return;
 
+    let articles = [];
     try {
       const res = await fetch('/api/articles');
-      const articles = await res.json();
+      if (res.ok) articles = await res.json();
+    } catch (e) {}
+
+    if ((!articles || !articles.length) && window.ClientStorage) {
+      articles = ClientStorage.getArticles();
+    }
+    if (!Array.isArray(articles)) articles = [];
 
       grid.innerHTML = articles.map(a => `
         <div class="article-card" data-slug="${a.slug}">
@@ -396,9 +423,16 @@ const BrainWavesApp = (function() {
     const grid = document.getElementById('testimonials-grid-container');
     if (!grid) return;
 
+    let testimonials = [];
     try {
       const res = await fetch('/api/testimonials');
-      const testimonials = await res.json();
+      if (res.ok) testimonials = await res.json();
+    } catch (e) {}
+
+    if ((!testimonials || !testimonials.length) && window.ClientStorage) {
+      testimonials = ClientStorage.getTestimonials();
+    }
+    if (!Array.isArray(testimonials)) testimonials = [];
 
       grid.innerHTML = testimonials.map(t => `
         <div class="testimonial-card">

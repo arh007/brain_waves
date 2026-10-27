@@ -1,0 +1,1732 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>BRAIN WAVES — Independent Digital Creative Studio · Product & Experience</title>
+  <meta name="description" content="BRAIN WAVES is a futuristic digital creative agency turning bold ideas into brands, products, and immersive experiences.">
+  <meta name="keywords" content="digital agency, creative studio, futuristic web, 3D web, three.js, UI/UX, brand identity, AI innovation">
+  <meta property="og:title" content="BRAIN WAVES — Ideas Are Just The Beginning. We Create What's Next.">
+  <meta property="og:description" content="A futuristic digital creative agency turning bold ideas into brands, products, and immersive experiences.">
+  <meta property="og:type" content="website">
+  <meta property="og:image" content="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe?auto=format&fit=crop&w=1200&q=80">
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2365F5FF'><path d='M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V18h-2v-1.07A6 6 0 0 1 7.07 13H8a4 4 0 0 0 7.93 0h.93a6 6 0 0 1-3.86 3.93z'/></svg>">
+  
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="css/design-tokens.css?v=3.1">
+  <link rel="stylesheet" href="css/main.css?v=3.1">
+  <link rel="stylesheet" href="css/admin.css?v=3.1">
+
+  <style>
+    /* Dark Cyber Theme Language Switcher & Nav Actions Guaranteed Styles */
+    .nav-actions {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.75rem !important;
+      flex-wrap: nowrap !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+    }
+    #lang-switcher-btn,
+    .lang-switcher-btn {
+      background: #11121E !important;
+      background-color: #11121E !important;
+      border: 1px solid rgba(101, 245, 255, 0.3) !important;
+      color: #F5F5F7 !important;
+      border-radius: 9999px !important;
+      padding: 0.45rem 0.85rem !important;
+      font-size: 0.75rem !important;
+      font-family: 'Space Grotesk', -apple-system, BlinkMacSystemFont, monospace !important;
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.45rem !important;
+      cursor: pointer !important;
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.5) !important;
+      outline: none !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+      transition: all 0.2s ease !important;
+    }
+    #lang-switcher-btn:hover,
+    .lang-switcher-btn:hover {
+      border-color: #65F5FF !important;
+      background: rgba(101, 245, 255, 0.14) !important;
+      background-color: rgba(101, 245, 255, 0.14) !important;
+      box-shadow: 0 0 16px rgba(101, 245, 255, 0.4) !important;
+    }
+    #lang-switcher-btn .lang-opt {
+      font-weight: 700;
+      letter-spacing: 0.05em;
+      color: #717694;
+    }
+    #lang-switcher-btn .lang-opt.active {
+      color: #65F5FF !important;
+      text-shadow: 0 0 10px rgba(101, 245, 255, 0.7) !important;
+    }
+    #lang-switcher-btn .lang-divider {
+      color: rgba(101, 245, 255, 0.35);
+      font-size: 0.75rem;
+    }
+    .nav-admin-link {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.45rem !important;
+      background: rgba(101, 245, 255, 0.08) !important;
+      border: 1px solid rgba(101, 245, 255, 0.28) !important;
+      color: #65F5FF !important;
+      border-radius: 9999px !important;
+      padding: 0.48rem 0.95rem !important;
+      font-size: 0.78rem !important;
+      font-family: monospace !important;
+      font-weight: 600 !important;
+      letter-spacing: 0.02em !important;
+      text-decoration: none !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+      transition: all 0.2s ease !important;
+      box-shadow: 0 2px 10px rgba(0,0,0,0.3) !important;
+    }
+    .nav-admin-link:hover {
+      background: rgba(101, 245, 255, 0.22) !important;
+      border-color: #65F5FF !important;
+      color: #FFFFFF !important;
+      box-shadow: 0 0 16px rgba(101, 245, 255, 0.45) !important;
+      transform: translateY(-1px) !important;
+    }
+    .btn-cta-primary {
+      display: inline-flex !important;
+      align-items: center !important;
+      gap: 0.45rem !important;
+      white-space: nowrap !important;
+      flex-shrink: 0 !important;
+    }
+  </style>
+</head>
+<body>
+
+  <!-- Ambient Glow and Background Simulation -->
+  <div class="bg-ambient-layer"></div>
+  <div class="cursor-glow"></div>
+
+  <!-- ========================================================
+       SITE HEADER & NAVIGATION
+       ======================================================== -->
+  <header class="site-header">
+    <div class="container nav-wrapper">
+      <a href="#" class="brand-logo" id="brand-logo-btn">
+        <div class="brand-icon-wrap">
+          <svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+            <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+            <path d="M12 5v14"/>
+            <path d="M8 12h8"/>
+          </svg>
+        </div>
+        <div class="brand-title">
+          <span>BRAIN WAVES</span>
+          <span>CREATIVE STUDIO</span>
+        </div>
+      </a>
+
+      <nav>
+        <ul class="nav-menu" id="nav-menu">
+          <li><a href="#works" class="nav-link" data-i18n="nav_works">Works</a></li>
+          <li><a href="#services" class="nav-link" data-i18n="nav_services">Services</a></li>
+          <li><a href="#manifesto" class="nav-link" data-i18n="nav_manifesto">Manifesto</a></li>
+          <li><a href="#about" class="nav-link" data-i18n="nav_studio">Studio</a></li>
+          <li><a href="#insights" class="nav-link" data-i18n="nav_insights">Insights</a></li>
+          <li><a href="#contact" class="nav-link" data-i18n="nav_contact">Contact</a></li>
+        </ul>
+      </nav>
+
+      <div class="nav-actions">
+        <!-- Language Switcher Pill (ID / EN) (First) - Dark Cyber Theme -->
+        <button class="lang-switcher-btn" id="lang-switcher-btn" onclick="BrainWavesI18n.toggleLang()" title="Switch Language / Ganti Bahasa">
+          <span class="lang-icon" style="font-size:0.9rem; line-height:1;">🌐</span>
+          <span class="lang-opt" data-lang="id">ID</span>
+          <span class="lang-divider">/</span>
+          <span class="lang-opt active" data-lang="en">EN</span>
+        </button>
+
+        <!-- Start a Project CTA Button (Second) -->
+        <a href="#project-lab" class="btn-cta-primary">
+          <span data-i18n="nav_start_project">Start a Project</span>
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+        </a>
+
+        <button class="mobile-menu-btn" id="mobile-menu-btn" aria-label="Open Mobile Menu">
+          <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="4" x2="20" y1="12" y2="12"/><line x1="4" x2="20" y1="6" y2="6"/><line x1="4" x2="20" y1="18" y2="18"/></svg>
+        </button>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <!-- ========================================================
+         HERO SECTION (CINEMATIC 3D NEURAL HERO)
+         ======================================================== -->
+    <section class="hero-section" id="hero">
+      <div class="hero-canvas-container">
+        <canvas id="neural-3d-canvas"></canvas>
+      </div>
+
+      <div class="container">
+        <div class="hero-content">
+          <div class="hero-status-badge">
+            <span class="pulse-dot"></span>
+            <span class="setting-val-status" data-i18n="hero_badge">AVAILABLE FOR Q4 / 2026 ENGAGEMENTS</span>
+          </div>
+
+          <h1 class="hero-headline">
+            <span class="text-gradient-cyan" data-i18n="hero_headline_1">IDEAS ARE JUST THE BEGINNING.</span>
+            <span class="text-gradient-violet" data-i18n="hero_headline_2">WE CREATE WHAT'S NEXT.</span>
+          </h1>
+
+          <p class="hero-subtitle" data-i18n="hero_subtitle">
+            We engineer visionary brand systems, high-velocity digital products, and tactile 3D experiences for organizations forging the future.
+          </p>
+
+          <div class="hero-ctas">
+            <a href="#project-lab" class="btn-cta-primary" style="font-size:1rem; padding:0.85rem 1.8rem;">
+              <span data-i18n="hero_cta_lab">Launch Project Lab</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M7 17l9.2-9.2M17 17V8H8"/></svg>
+            </a>
+            <a href="#works" class="btn-cta-secondary" style="font-size:1rem; padding:0.85rem 1.8rem;">
+              <span data-i18n="hero_cta_works">Explore Selected Works ↘</span>
+            </a>
+          </div>
+
+          <!-- 3 Pillars strip from PRD -->
+          <div class="hero-pillars-grid">
+            <div class="pillar-card">
+              <span class="pillar-num">01.</span>
+              <h3 class="pillar-title" data-i18n="pillar_1_title">Think Differently</h3>
+              <p class="pillar-desc" data-i18n="pillar_1_desc">Deconstruct consensus thinking to reveal untapped market paradigms.</p>
+            </div>
+            <div class="pillar-card">
+              <span class="pillar-num">02.</span>
+              <h3 class="pillar-title" data-i18n="pillar_2_title">Design Boldly</h3>
+              <p class="pillar-desc" data-i18n="pillar_2_desc">Provocative aesthetics engineered to command instant cultural authority.</p>
+            </div>
+            <div class="pillar-card">
+              <span class="pillar-num">03.</span>
+              <h3 class="pillar-title" data-i18n="pillar_3_title">Build the Future</h3>
+              <p class="pillar-desc" data-i18n="pillar_3_desc">Production-grade WebGL, modern backend architecture, and sub-second speed.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         MARQUEE TICKER (KINETIC TEXT STRIP)
+         ======================================================== -->
+    <div class="marquee-container" aria-hidden="true">
+      <div class="marquee-content">
+        <div class="marquee-item">BRAND STRATEGY <span class="divider">✦</span></div>
+        <div class="marquee-item">DIGITAL PRODUCTS <span class="divider">✦</span></div>
+        <div class="marquee-item">IMMERSIVE 3D EXPERIENCES <span class="divider">✦</span></div>
+        <div class="marquee-item">CREATIVE TECHNOLOGY <span class="divider">✦</span></div>
+        <div class="marquee-item">NEURAL AI INTEGRATION <span class="divider">✦</span></div>
+        <div class="marquee-item">KINETIC MOTION DESIGN <span class="divider">✦</span></div>
+        <div class="marquee-item">HIGH-OCTANE UI/UX <span class="divider">✦</span></div>
+        <div class="marquee-item">BESPOKE ARCHITECTURES <span class="divider">✦</span></div>
+        <!-- Duplicated for seamless loop -->
+        <div class="marquee-item">BRAND STRATEGY <span class="divider">✦</span></div>
+        <div class="marquee-item">DIGITAL PRODUCTS <span class="divider">✦</span></div>
+        <div class="marquee-item">IMMERSIVE 3D EXPERIENCES <span class="divider">✦</span></div>
+        <div class="marquee-item">CREATIVE TECHNOLOGY <span class="divider">✦</span></div>
+        <div class="marquee-item">NEURAL AI INTEGRATION <span class="divider">✦</span></div>
+        <div class="marquee-item">KINETIC MOTION DESIGN <span class="divider">✦</span></div>
+        <div class="marquee-item">HIGH-OCTANE UI/UX <span class="divider">✦</span></div>
+        <div class="marquee-item">BESPOKE ARCHITECTURES <span class="divider">✦</span></div>
+      </div>
+    </div>
+
+    <!-- ========================================================
+         SELECTED WORKS (PORTFOLIO)
+         ======================================================== -->
+    <section class="section" id="works">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="works_tag">SELECTED WORKS</span>
+          <h2 class="section-title" data-i18n="works_title">Case Studies in Digital Distinction</h2>
+          <p class="section-desc" data-i18n="works_desc">
+            Explore our curated portfolio of transformative digital products, brand architectures, and interactive 3D flagship experiences.
+          </p>
+        </div>
+
+        <!-- Controls: Category Filters & Live Search -->
+        <div class="portfolio-controls">
+          <div class="filter-pills">
+            <button class="filter-btn active" data-category="all" data-i18n="filter_all">All Disciplines</button>
+            <button class="filter-btn" data-category="branding" data-i18n="filter_brand">Brand Architecture</button>
+            <button class="filter-btn" data-category="digital-product" data-i18n="filter_product">Digital Products</button>
+            <button class="filter-btn" data-category="web-3d" data-i18n="filter_3d">Web & 3D</button>
+            <button class="filter-btn" data-category="ai-tech" data-i18n="filter_ai">AI & Creative Tech</button>
+          </div>
+
+          <div class="search-input-wrap">
+            <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.3-4.3"/></svg>
+            <input type="text" id="project-search-input" placeholder="Search projects or technologies..." aria-label="Search projects" data-i18n-placeholder="search_placeholder">
+          </div>
+        </div>
+
+        <!-- Projects Dynamic Grid -->
+        <div class="projects-grid" id="projects-grid-container">
+          <!-- Populated dynamically via /api/projects -->
+          <div style="grid-column: 1 / -1; text-align:center; padding:3rem; color:var(--text-muted);">
+            Connecting to Neural Database...
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         STUDIO CAPABILITIES (SERVICES CATALOG)
+         ======================================================== -->
+    <section class="section" id="services" style="background:var(--bg-void);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="services_tag">CAPABILITIES</span>
+          <h2 class="section-title" data-i18n="services_title">End-to-End Creative Engineering</h2>
+          <p class="section-desc" data-i18n="services_desc">
+            Six interconnected disciplines designed to take ambitious concepts from initial spark to global market domination.
+          </p>
+        </div>
+
+        <div class="services-grid" id="services-grid-container">
+          <!-- Populated dynamically via /api/services -->
+          <div style="grid-column: 1 / -1; text-align:center; padding:3rem; color:var(--text-muted);">
+            Loading Studio Capabilities...
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         CREATIVE MANIFESTO (PHILOSOPHY)
+         ======================================================== -->
+    <section class="section manifesto-section" id="manifesto">
+      <div class="container">
+        <span class="section-tag" style="justify-content:center;" data-i18n="manifesto_tag">OUR MANIFESTO</span>
+        <h2 class="manifesto-statement" data-i18n="manifesto_statement">
+          "We do not build lukewarm templates. We construct digital cathedrals that command attention, provoke emotion, and endure."
+        </h2>
+
+        <div class="manifesto-grid">
+          <div class="manifesto-card">
+            <h3 class="manifesto-card-title" data-i18n="m1_title">01. Originality Over Conformity</h3>
+            <p class="manifesto-card-desc" data-i18n="m1_desc">The greatest risk in contemporary digital culture is becoming invisible. We treat formulaic safety as existential stagnation.</p>
+          </div>
+          <div class="manifesto-card">
+            <h3 class="manifesto-card-title" data-i18n="m2_title">02. Precision at Every Scale</h3>
+            <p class="manifesto-card-desc" data-i18n="m2_desc">From micro-millisecond frame budgets to bespoke typographic kerning, every pixel is calibrated with mathematical devotion.</p>
+          </div>
+          <div class="manifesto-card">
+            <h3 class="manifesto-card-title" data-i18n="m3_title">03. Technology as Art</h3>
+            <p class="manifesto-card-desc" data-i18n="m3_desc">Code is not merely utilitarian logic—it is a fluid canvas. We harness GPU shaders to give software a living heartbeat.</p>
+          </div>
+          <div class="manifesto-card">
+            <h3 class="manifesto-card-title" data-i18n="m4_title">04. Evolutionary Velocity</h3>
+            <p class="manifesto-card-desc" data-i18n="m4_desc">Digital ecosystems never sit still. We build modular, AI-ready frameworks engineered to scale and adapt effortlessly.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         5-STAGE PROCESS (METHODOLOGY)
+         ======================================================== -->
+    <section class="section" id="process">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag" data-i18n="process_tag">METHODOLOGY</span>
+          <h2 class="section-title" data-i18n="process_title">The Neural Engineering Cycle</h2>
+          <p class="section-desc" data-i18n="process_desc">Our proven five-stage trajectory designed for rapid convergence and zero execution friction.</p>
+        </div>
+
+        <div class="process-grid">
+          <div class="process-step-card">
+            <span class="process-step-num">01</span>
+            <h3 class="process-step-title" data-i18n="p1_title">Discover</h3>
+            <p class="process-step-desc" data-i18n="p1_desc">Immersion into brand DNA, customer psychology, and competitive white-spaces.</p>
+          </div>
+          <div class="process-step-card">
+            <span class="process-step-num">02</span>
+            <h3 class="process-step-title" data-i18n="p2_title">Strategize</h3>
+            <p class="process-step-desc" data-i18n="p2_desc">Architecting the conceptual thesis, technical blueprint, and interaction system.</p>
+          </div>
+          <div class="process-step-card">
+            <span class="process-step-num">03</span>
+            <h3 class="process-step-title" data-i18n="p3_title">Create</h3>
+            <p class="process-step-desc" data-i18n="p3_desc">Iterative 3D explorations, bespoke design tokens, and tactile interface craft.</p>
+          </div>
+          <div class="process-step-card">
+            <span class="process-step-num">04</span>
+            <h3 class="process-step-title" data-i18n="p4_title">Launch</h3>
+            <p class="process-step-desc" data-i18n="p4_desc">Rigorous multi-device stress testing, performance auditing, and global CDN rollout.</p>
+          </div>
+          <div class="process-step-card">
+            <span class="process-step-num">05</span>
+            <h3 class="process-step-title" data-i18n="p5_title">Evolve</h3>
+            <p class="process-step-desc" data-i18n="p5_desc">Real-time telemetry analysis, conversion optimization, and continuous feature expansion.</p>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         OUR UNIVERSE (ABOUT STUDIO)
+         ======================================================== -->
+    <section class="section" id="about" style="background:#090B14;">
+      <div class="container">
+        <div class="about-grid">
+          <div>
+            <span class="section-tag">OUR UNIVERSE</span>
+            <h2 class="section-title" style="margin-bottom:1.5rem;">Born in the Crucible of Art and Code</h2>
+            <p class="about-text-lead">
+              BRAIN WAVES is an independent digital creative studio operating at the intersection of brand architecture, sensory UI/UX, and generative intelligence.
+            </p>
+            <p class="about-text-body">
+              Founded by a coalition of design polymaths, quantitative engineers, and creative technologists, we exist to build the digital infrastructure of tomorrow. We work with a select cohort of ambitious brands each quarter, guaranteeing our partners uncompromised executive focus and flawless delivery.
+            </p>
+            <a href="#project-lab" class="btn-cta-secondary">
+              <span>Initiate Collaboration ↗</span>
+            </a>
+          </div>
+
+          <div class="studio-stats-grid">
+            <div class="stat-box">
+              <div class="stat-val">48+</div>
+              <div class="stat-label">Production Platforms Shipped</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val">14</div>
+              <div class="stat-label">Global Design & Tech Accolades</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val">99.4%</div>
+              <div class="stat-label">Client Retention & Satisfaction</div>
+            </div>
+            <div class="stat-box">
+              <div class="stat-val">0.38s</div>
+              <div class="stat-label">Average Global LCP Benchmark</div>
+            </div>
+          </div>
+        </div>
+
+        <!-- Leadership Core -->
+        <div class="team-grid">
+          <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=200&q=80" alt="Elena Vance" class="team-avatar" />
+            <div class="team-info">
+              <h4>Elena Vance</h4>
+              <p>FOUNDER & CREATIVE DIRECTOR</p>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=200&q=80" alt="Marcus Thorne" class="team-avatar" />
+            <div class="team-info">
+              <h4>Marcus Thorne</h4>
+              <p>HEAD OF TECHNOLOGY</p>
+            </div>
+          </div>
+          <div class="team-card">
+            <img src="https://images.unsplash.com/photo-1517841905240-472988babdf9?auto=format&fit=crop&w=200&q=80" alt="Maya Lin" class="team-avatar" />
+            <div class="team-info">
+              <h4>Maya Lin</h4>
+              <p>SPATIAL DESIGN LEAD</p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         SMART PROJECT BUILDER (PROJECT LAB)
+         ======================================================== -->
+    <section class="section project-lab-section" id="project-lab">
+      <div class="container">
+        <div class="section-header" style="text-align:center;">
+          <span class="section-tag" style="justify-content:center;">PROJECT LAB</span>
+          <h2 class="section-title">Let's Build Something Extraordinary</h2>
+          <p class="section-desc" style="margin-left:auto; margin-right:auto;">
+            Configure your project parameters through our interactive five-step wizard to generate an official brief and project reference.
+          </p>
+        </div>
+
+        <div class="wizard-container">
+          <!-- Step Progress Tracker -->
+          <div class="wizard-progress-bar">
+            <div class="wizard-step-node active" data-step="1">
+              <div class="step-circle">01</div>
+              <span class="step-label">Mission</span>
+            </div>
+            <div class="wizard-step-node" data-step="2">
+              <div class="step-circle">02</div>
+              <span class="step-label">Vision</span>
+            </div>
+            <div class="wizard-step-node" data-step="3">
+              <div class="step-circle">03</div>
+              <span class="step-label">Scope</span>
+            </div>
+            <div class="wizard-step-node" data-step="4">
+              <div class="step-circle">04</div>
+              <span class="step-label">Identity</span>
+            </div>
+            <div class="wizard-step-node" data-step="5">
+              <div class="step-circle">05</div>
+              <span class="step-label">Review</span>
+            </div>
+          </div>
+
+          <!-- Step 1: Choose Mission (Services) -->
+          <div class="wizard-step-panel active" id="wizard-step-1">
+            <h3 class="wizard-panel-title">1. Choose Your Mission</h3>
+            <p class="wizard-panel-desc">Select one or multiple disciplines required for your project.</p>
+
+            <div class="services-picker-grid">
+              <div class="service-choice-card selected" data-service-id="1">
+                <div class="choice-info">
+                  <h4>Brand Strategy & Identity</h4>
+                  <p>Repositioning, visual identity & dynamic logo systems</p>
+                </div>
+                <div class="choice-check">✓</div>
+              </div>
+              <div class="service-choice-card" data-service-id="2">
+                <div class="choice-info">
+                  <h4>Digital Product Design (UI/UX)</h4>
+                  <p>Enterprise SaaS, mobile UX & high-fidelity systems</p>
+                </div>
+                <div class="choice-check">✓</div>
+              </div>
+              <div class="service-choice-card selected" data-service-id="3">
+                <div class="choice-info">
+                  <h4>Web & Application Engineering</h4>
+                  <p>Custom full-stack portals, APIs & bespoke CMS</p>
+                </div>
+                <div class="choice-check">✓</div>
+              </div>
+              <div class="service-choice-card" data-service-id="4">
+                <div class="choice-info">
+                  <h4>Creative Campaigns & Storytelling</h4>
+                  <p>Product launch activations & social motion graphics</p>
+                </div>
+                <div class="choice-check">✓</div>
+              </div>
+              <div class="service-choice-card" data-service-id="5">
+                <div class="choice-info">
+                  <h4>Motion & 3D Web Experiences</h4>
+                  <p>Interactive WebGL, Three.js shaders & ray tracing</p>
+                </div>
+                <div class="choice-check">✓</div>
+              </div>
+              <div class="service-choice-card" data-service-id="6">
+                <div class="choice-info">
+                  <h4>AI & Creative Innovation</h4>
+                  <p>Custom agents, generative workflows & private LLMs</p>
+                </div>
+                <div class="choice-check">✓</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 2: Define Vision (Brief) -->
+          <div class="wizard-step-panel" id="wizard-step-2">
+            <h3 class="wizard-panel-title">2. Define Your Project Vision</h3>
+            <p class="wizard-panel-desc">Tell us about what you want to build, the core problem, and your intended audience.</p>
+
+            <div class="form-group">
+              <label for="wizard-brief-input">Project Summary & Key Objectives *</label>
+              <textarea class="form-control" id="wizard-brief-input" rows="5" placeholder="e.g. We are building a high-frequency carbon credit exchange and need an interactive 3D web terminal and a bold cyber-luxury brand identity..."></textarea>
+            </div>
+          </div>
+
+          <!-- Step 3: Set Parameters (Budget & Timeline) -->
+          <div class="wizard-step-panel" id="wizard-step-3">
+            <h3 class="wizard-panel-title">3. Set Parameters & Constraints</h3>
+            <p class="wizard-panel-desc">Help us gauge the appropriate engineering depth and team allocation.</p>
+
+            <div class="parameter-group">
+              <label>Budget Allocation Range</label>
+              <div class="pills-radio-row">
+                <div class="pill-option budget-pill" data-value="Di bawah Rp10 juta">Di bawah Rp10 juta</div>
+                <div class="pill-option budget-pill" data-value="Rp10–25 juta">Rp10–25 juta</div>
+                <div class="pill-option budget-pill selected" data-value="Rp25–50 juta">Rp25–50 juta</div>
+                <div class="pill-option budget-pill" data-value="Di atas Rp50 juta">Di atas Rp50 juta</div>
+                <div class="pill-option budget-pill" data-value="Diskusi terlebih dahulu">Diskusi terlebih dahulu</div>
+              </div>
+            </div>
+
+            <div class="parameter-group">
+              <label>Target Launch Timeline</label>
+              <div class="pills-radio-row">
+                <div class="pill-option timeline-pill" data-value="Kurang dari 1 bulan">Kurang dari 1 bulan</div>
+                <div class="pill-option timeline-pill selected" data-value="1–2 bulan">1–2 bulan</div>
+                <div class="pill-option timeline-pill" data-value="3–6 bulan">3–6 bulan</div>
+                <div class="pill-option timeline-pill" data-value="Fleksibel">Fleksibel</div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Step 4: Identity & Contact -->
+          <div class="wizard-step-panel" id="wizard-step-4">
+            <h3 class="wizard-panel-title">4. Tell Us About Yourself</h3>
+            <p class="wizard-panel-desc">Where can our Creative Director transmit your preliminary architecture report?</p>
+
+            <div style="display:grid; grid-template-columns:1fr 1fr; gap:1.25rem;">
+              <div class="form-group">
+                <label for="wizard-name-input">Full Name *</label>
+                <input type="text" class="form-control" id="wizard-name-input" placeholder="e.g. Maya Thorne">
+              </div>
+              <div class="form-group">
+                <label for="wizard-email-input">Work Email Address *</label>
+                <input type="email" class="form-control" id="wizard-email-input" placeholder="maya@organization.com">
+              </div>
+            </div>
+
+            <div class="form-group">
+              <label for="wizard-company-input">Organization / Company (Optional)</label>
+              <input type="text" class="form-control" id="wizard-company-input" placeholder="e.g. Hyperion Fusion AG">
+            </div>
+
+            <!-- Anti-spam honeypot hidden -->
+            <input type="text" id="wizard-honeypot" style="display:none;" tabindex="-1" autocomplete="off">
+          </div>
+
+          <!-- Step 5: Review & Submit -->
+          <div class="wizard-step-panel" id="wizard-step-5">
+            <h3 class="wizard-panel-title">5. Review Your Project Dossier</h3>
+            <p class="wizard-panel-desc">Confirm your requirements before transmitting directly to our leadership.</p>
+
+            <div class="review-summary-card">
+              <div class="summary-item">
+                <span class="label">Selected Disciplines</span>
+                <span class="value" id="summary-services-val">Loading...</span>
+              </div>
+              <div class="summary-item">
+                <span class="label">Budget Estimate</span>
+                <span class="value" id="summary-budget-val">Rp25–50 juta</span>
+              </div>
+              <div class="summary-item">
+                <span class="label">Target Timeline</span>
+                <span class="value" id="summary-timeline-val">1–2 bulan</span>
+              </div>
+              <div class="summary-item">
+                <span class="label">Lead Contact</span>
+                <span class="value" id="summary-contact-val">Elena Vance</span>
+              </div>
+              <div class="summary-item">
+                <span class="label">Brief Excerpt</span>
+                <span class="value" id="summary-brief-val" style="font-style:italic;">No brief yet</span>
+              </div>
+            </div>
+
+            <div style="font-size:0.75rem; color:var(--text-muted); line-height:1.5;">
+              By submitting, your brief will be stored in our internal encrypted database and assigned an official tracking reference. We will schedule a 30-minute discovery session within 24 business hours.
+            </div>
+          </div>
+
+          <!-- Wizard Nav Controls -->
+          <div class="wizard-nav-btns">
+            <button class="btn-cta-secondary" id="wizard-prev-btn" style="visibility:hidden;">
+              <span>← Back</span>
+            </button>
+            <button class="btn-cta-primary" id="wizard-next-btn">
+              <span>Next Step</span>
+              <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+            </button>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         EDITORIAL INSIGHTS (ARTICLES & THOUGHT LEADERSHIP)
+         ======================================================== -->
+    <section class="section" id="insights">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">INSIGHTS</span>
+          <h2 class="section-title">The Brain Waves Editorial</h2>
+          <p class="section-desc">Essays, technical investigations, and strategic theses on the future of software, design, and digital culture.</p>
+        </div>
+
+        <div class="articles-grid" id="articles-grid-container">
+          <!-- Populated dynamically via /api/articles -->
+          <div style="grid-column: 1 / -1; text-align:center; padding:3rem; color:var(--text-muted);">
+            Retrieving Editorial Insights...
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         CLIENT TESTIMONIALS
+         ======================================================== -->
+    <section class="section" id="testimonials" style="background:var(--bg-void);">
+      <div class="container">
+        <div class="section-header">
+          <span class="section-tag">VERIFIED ENDORSEMENTS</span>
+          <h2 class="section-title">What Our Partners Experience</h2>
+        </div>
+
+        <div class="testimonials-grid" id="testimonials-grid-container">
+          <!-- Populated dynamically via /api/testimonials -->
+        </div>
+      </div>
+    </section>
+
+    <!-- ========================================================
+         CONTACT & INQUIRY CONSULTATION
+         ======================================================== -->
+    <section class="section" id="contact" style="background:#090B14; border-top:1px solid var(--border-card);">
+      <div class="container">
+        <div class="contact-grid">
+          <div>
+            <span class="section-tag" data-i18n="contact_tag">CONTACT STUDIO</span>
+            <h2 class="section-title" style="margin-bottom:1.25rem;" data-i18n="contact_title">Initiate Direct Communication</h2>
+            <p class="section-desc" style="margin-bottom:2.5rem;" data-i18n="contact_desc">
+              Have an urgent consultation or strategic inquiry? Reach out to our executive desk or send a direct dispatch below.
+            </p>
+
+            <div class="contact-info-cards">
+              <div class="contact-card">
+                <div class="contact-card-icon">✉</div>
+                <div class="contact-card-content">
+                  <h4 data-i18n="contact_gen_inquiry">General Inquiries</h4>
+                  <p><a href="mailto:hello@brainwaves.studio" class="setting-val-email">hello@brainwaves.studio</a></p>
+                </div>
+              </div>
+              <div class="contact-card">
+                <div class="contact-card-icon">🌐</div>
+                <div class="contact-card-content">
+                  <h4 data-i18n="contact_headquarters">Studio Headquarters</h4>
+                  <p class="setting-val-location">Jakarta · Tokyo · Zurich (Global Remote)</p>
+                </div>
+              </div>
+              <div class="contact-card">
+                <div class="contact-card-icon">⚡</div>
+                <div class="contact-card-content">
+                  <h4 data-i18n="contact_status_title">Studio Operational Status</h4>
+                  <p><span class="pulse-dot" style="display:inline-block; margin-right:4px;"></span> <span data-i18n="contact_status_active">Active Hub (WIB / UTC+7)</span></p>
+                </div>
+              </div>
+            </div>
+          </div>
+
+          <!-- Direct Form -->
+          <div>
+            <div style="background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-xl); padding:2.5rem;">
+              <h3 style="font-family:var(--font-display); font-size:1.35rem; margin-bottom:1.5rem;" data-i18n="contact_form_title">Quick Consultation Dispatch</h3>
+              <form id="direct-contact-form">
+                <div class="form-group">
+                  <label for="contact-name-input" data-i18n="contact_name_label">Your Name *</label>
+                  <input type="text" class="form-control" id="contact-name-input" required placeholder="Alex Rivera">
+                </div>
+                <div class="form-group">
+                  <label for="contact-email-input" data-i18n="contact_email_label">Your Email *</label>
+                  <input type="email" class="form-control" id="contact-email-input" required placeholder="alex@company.com">
+                </div>
+                <div class="form-group">
+                  <label for="contact-message-input" data-i18n="contact_msg_label">Message / Questions *</label>
+                  <textarea class="form-control" id="contact-message-input" rows="4" required placeholder="Tell us how we can assist your project..." data-i18n-placeholder="contact_msg_placeholder"></textarea>
+                </div>
+                <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center;">
+                  <span data-i18n="contact_submit">Transmit Consultation Request</span>
+                  <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+                </button>
+              </form>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <!-- ========================================================
+       FOOTER
+       ======================================================== -->
+  <footer class="site-footer">
+    <div class="container">
+      <div class="footer-top-grid">
+        <div class="footer-brand">
+          <div class="brand-logo">
+            <div class="brand-icon-wrap">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M12 5a3 3 0 1 0-5.997.125 4 4 0 0 0-2.526 5.77 4 4 0 0 0 .556 6.588A4 4 0 1 0 12 18Z"/>
+                <path d="M12 5a3 3 0 1 1 5.997.125 4 4 0 0 1 2.526 5.77 4 4 0 0 1-.556 6.588A4 4 0 1 1 12 18Z"/>
+                <path d="M12 5v14"/>
+                <path d="M8 12h8"/>
+              </svg>
+            </div>
+            <span style="font-family:var(--font-display); font-weight:700;">BRAIN WAVES</span>
+          </div>
+          <p>
+            An independent digital creative studio turning visionary ideas into brands, products, and living immersive experiences.
+          </p>
+        </div>
+
+        <div class="footer-col">
+          <h4>Navigation</h4>
+          <ul class="footer-links">
+            <li><a href="#works">Selected Works</a></li>
+            <li><a href="#services">Capabilities</a></li>
+            <li><a href="#manifesto">Manifesto</a></li>
+            <li><a href="#about">Studio Universe</a></li>
+            <li><a href="#project-lab">Project Lab</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Insights & Media</h4>
+          <ul class="footer-links">
+            <li><a href="#insights">Editorial</a></li>
+            <li><a href="https://github.com" target="_blank" rel="noopener">GitHub</a></li>
+            <li><a href="https://behance.net" target="_blank" rel="noopener">Behance</a></li>
+            <li><a href="https://dribbble.com" target="_blank" rel="noopener">Dribbble</a></li>
+            <li><a href="https://twitter.com" target="_blank" rel="noopener">X / Twitter</a></li>
+          </ul>
+        </div>
+
+        <div class="footer-col">
+          <h4>Operations</h4>
+          <ul class="footer-links">
+            <li><a href="/login" style="color:var(--neon-cyan); font-weight:600;">Login Admin (/login)</a></li>
+            <li><a href="/admin">Dashboard CMS (/admin)</a></li>
+            <li><a href="#" id="open-privacy-modal-btn">Privacy Policy</a></li>
+            <li><a href="#" id="open-terms-modal-btn">Terms of Service</a></li>
+            <li><span style="color:var(--text-muted); font-size:0.8rem;">Status: 100% Operational</span></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 BRAIN WAVES Creative Studio. All Rights Reserved.</div>
+        <div style="font-family:var(--font-mono); font-size:0.75rem;">
+          ENGINEERED WITH NEON FUTURISTIC PRECISION
+        </div>
+      </div>
+    </div>
+  </footer>
+
+  <!-- ========================================================
+       MODALS: CASE STUDY DRAWER
+       ======================================================== -->
+  <div class="modal-overlay" id="case-study-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:920px;">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:0.75rem;">
+          <span id="cs-modal-category" class="project-badge-cat" style="position:static;">Design</span>
+          <span id="cs-modal-client" style="font-size:0.85rem; color:var(--text-secondary); font-family:var(--font-mono);">Client</span>
+          <span style="color:var(--border-card);">·</span>
+          <span id="cs-modal-year" style="font-size:0.85rem; color:var(--text-muted); font-family:var(--font-mono);">2026</span>
+        </div>
+        <button class="modal-close-btn" aria-label="Close Case Study">&times;</button>
+      </div>
+
+      <div class="modal-body">
+        <h2 id="cs-modal-title" style="font-family:var(--font-display); font-size:2rem; font-weight:700; margin-bottom:1.5rem;">Project Title</h2>
+
+        <img id="cs-modal-img" src="" alt="Case Study Hero" style="width:100%; height:380px; object-fit:cover; border-radius:var(--radius-lg); margin-bottom:2rem; border:1px solid var(--border-card);" />
+
+        <!-- Metrics Strip -->
+        <div id="cs-modal-metrics" style="display:grid; grid-template-columns:repeat(3, 1fr); gap:1rem; margin-bottom:2.5rem;"></div>
+
+        <div style="display:grid; grid-template-columns:1fr; gap:2rem; margin-bottom:2.5rem;">
+          <div>
+            <h4 style="font-family:var(--font-mono); font-size:0.8rem; color:var(--neon-cyan); text-transform:uppercase; margin-bottom:0.5rem;">// THE CHALLENGE</h4>
+            <p id="cs-modal-challenge" style="color:var(--text-secondary); font-size:1rem; line-height:1.7;"></p>
+          </div>
+          <div>
+            <h4 style="font-family:var(--font-mono); font-size:0.8rem; color:var(--electric-violet); text-transform:uppercase; margin-bottom:0.5rem;">// THE ARCHITECTURAL SOLUTION</h4>
+            <p id="cs-modal-solution" style="color:var(--text-secondary); font-size:1rem; line-height:1.7;"></p>
+          </div>
+          <div>
+            <h4 style="font-family:var(--font-mono); font-size:0.8rem; color:var(--success); text-transform:uppercase; margin-bottom:0.5rem;">// VERIFIED RESULTS</h4>
+            <p id="cs-modal-results" style="color:var(--text-secondary); font-size:1rem; line-height:1.7;"></p>
+          </div>
+        </div>
+
+        <div style="border-top:1px solid var(--border-subtle); padding-top:1.5rem; display:flex; justify-content:space-between; align-items:center; flex-wrap:wrap; gap:1rem;">
+          <div id="cs-modal-tech" style="display:flex; gap:0.5rem; flex-wrap:wrap;"></div>
+          <div style="display:flex; gap:0.75rem;">
+            <button class="btn-cta-secondary" id="cs-modal-prev" style="padding:0.45rem 1rem; font-size:0.8rem;">← Previous</button>
+            <button class="btn-cta-secondary" id="cs-modal-next" style="padding:0.45rem 1rem; font-size:0.8rem;">Next →</button>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: SERVICE DEEP DIVE
+       ======================================================== -->
+  <div class="modal-overlay" id="service-detail-modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--neon-cyan);">// SERVICE SPECIFICATION</span>
+        <button class="modal-close-btn" aria-label="Close Service Spec">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h2 id="service-modal-name" style="font-family:var(--font-display); font-size:1.75rem; font-weight:700; margin-bottom:1rem;">Service Name</h2>
+        <p id="service-modal-desc" style="color:var(--text-secondary); font-size:1rem; line-height:1.7; margin-bottom:2rem;"></p>
+
+        <h4 style="font-family:var(--font-mono); font-size:0.8rem; color:var(--electric-violet); margin-bottom:0.75rem;">DELIVERABLES & ASSETS</h4>
+        <ul id="service-modal-deliverables" class="service-deliverables-list" style="margin-bottom:2rem;"></ul>
+
+        <h4 style="font-family:var(--font-mono); font-size:0.8rem; color:var(--neon-cyan); margin-bottom:0.75rem;">EXECUTION PHASES</h4>
+        <div id="service-modal-steps" style="margin-bottom:2rem;"></div>
+
+        <h4 style="font-family:var(--font-mono); font-size:0.8rem; color:var(--warning); margin-bottom:0.75rem;">FREQUENTLY ASKED QUESTIONS</h4>
+        <div id="service-modal-faq"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: ARTICLE READER (INSIGHTS)
+       ======================================================== -->
+  <div class="modal-overlay" id="article-reader-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:850px;">
+      <div class="modal-header">
+        <div style="display:flex; align-items:center; gap:0.5rem; font-family:var(--font-mono); font-size:0.75rem; color:var(--neon-cyan);">
+          <span id="article-modal-category">Design</span> · <span id="article-modal-time">5 min</span>
+        </div>
+        <button class="modal-close-btn" aria-label="Close Article">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h1 id="article-modal-title" style="font-family:var(--font-display); font-size:2.2rem; font-weight:700; line-height:1.25; margin-bottom:1rem;">Article Title</h1>
+        <div style="font-size:0.85rem; color:var(--text-muted); font-family:var(--font-mono); margin-bottom:1.5rem;">
+          By <strong id="article-modal-author" style="color:var(--text-primary);">Author</strong> · BRAIN WAVES Editorial
+        </div>
+        <img id="article-modal-img" src="" alt="Article Banner" style="width:100%; height:320px; object-fit:cover; border-radius:var(--radius-lg); margin-bottom:2rem; border:1px solid var(--border-card);" />
+        <div id="article-modal-body"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: INQUIRY SUBMISSION RECEIPT
+       ======================================================== -->
+  <div class="modal-overlay" id="inquiry-receipt-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:560px; text-align:center; padding:2rem 1.5rem;">
+      <div style="width:64px; height:64px; border-radius:50%; background:rgba(67, 217, 163, 0.15); border:1px solid var(--success); color:var(--success); display:flex; align-items:center; justify-content:center; margin:0 auto 1.5rem auto; font-size:2rem;">
+        ✓
+      </div>
+      <h2 style="font-family:var(--font-display); font-size:1.85rem; font-weight:700; margin-bottom:0.5rem;">Brief Received!</h2>
+      <p style="color:var(--text-secondary); font-size:0.95rem; margin-bottom:1.75rem;">
+        Your project brief has been committed to the Brain Waves database. Our leadership team will review the parameters and schedule your discovery session.
+      </p>
+
+      <div style="background:var(--surface-dark); border:1px solid var(--border-active); border-radius:var(--radius-md); padding:1.5rem; text-align:left; margin-bottom:2rem;">
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.75rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.75rem;">
+          <span style="color:var(--text-muted); font-size:0.8rem;">Dossier Reference:</span>
+          <strong id="receipt-ref-code" style="font-family:var(--font-mono); color:var(--neon-cyan); font-size:1rem;">BW-2026-0000</strong>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; font-size:0.85rem;">
+          <span style="color:var(--text-muted);">Client Contact:</span>
+          <span id="receipt-client-name" style="color:var(--text-primary);">Client Name</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; margin-bottom:0.5rem; font-size:0.85rem;">
+          <span style="color:var(--text-muted);">Dispatch Email:</span>
+          <span id="receipt-client-email" style="color:var(--text-primary);">client@domain.com</span>
+        </div>
+        <div style="display:flex; justify-content:space-between; font-size:0.85rem;">
+          <span style="color:var(--text-muted);">Recorded At:</span>
+          <span id="receipt-timestamp" style="color:var(--text-primary);">Timestamp</span>
+        </div>
+      </div>
+
+      <button class="btn-cta-primary modal-close-btn" style="width:100%; justify-content:center;">
+        <span>Return to Universe</span>
+      </button>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: PRIVACY POLICY & TERMS
+       ======================================================== -->
+  <div class="modal-overlay" id="privacy-modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--neon-cyan);">LEGAL NOTICE</span>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h2 style="font-family:var(--font-display); font-size:1.75rem; margin-bottom:1rem;">Privacy Policy</h2>
+        <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:1rem;">
+          BRAIN WAVES respects client confidentiality and intellectual property. Data submitted via the Project Lab is used strictly for project estimation, architectural scoping, and direct communication.
+        </p>
+        <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:1rem;">
+          We implement zero third-party telemetry sharing. Contact inquiries and project parameters are stored in isolated relational databases compliant with global standards.
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <div class="modal-overlay" id="terms-modal" role="dialog" aria-modal="true">
+    <div class="modal-box">
+      <div class="modal-header">
+        <span style="font-family:var(--font-mono); font-size:0.75rem; color:var(--neon-cyan);">LEGAL NOTICE</span>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <h2 style="font-family:var(--font-display); font-size:1.75rem; margin-bottom:1rem;">Terms of Service</h2>
+        <p style="color:var(--text-secondary); line-height:1.7; margin-bottom:1rem;">
+          All intellectual property, proprietary 3D shaders, and bespoke architectures developed during client engagements are transferred to client ownership upon contractual completion.
+        </p>
+        <p style="color:var(--text-secondary); line-height:1.7;">
+          Project quotes and timelines provided via the Project Lab represent preliminary feasibility assessments and are finalized via formal Master Services Agreements (MSA).
+        </p>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       ADMIN CMS PORTAL (PROTECTED DASHBOARD)
+       ======================================================== -->
+  <div class="admin-portal-overlay" id="admin-portal-overlay" role="dialog" aria-modal="true">
+    <!-- Unauthenticated Login Card -->
+    <div class="admin-login-card" id="admin-login-view">
+      <div class="login-header">
+        <span class="admin-badge">// BRAIN WAVES ADMIN</span>
+        <h2>Command Access</h2>
+        <p>Enter administrative credentials to access CMS & Inquiries</p>
+      </div>
+      <form id="admin-login-form">
+        <div class="form-group">
+          <label for="admin-email-input">Admin Email</label>
+          <input type="email" class="form-control" id="admin-email-input" value="admin@brainwaves.studio" required>
+        </div>
+        <div class="form-group">
+          <label for="admin-password-input">Security Password</label>
+          <input type="password" class="form-control" id="admin-password-input" value="admin123" required>
+        </div>
+        <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center; margin-top:1rem;">
+          Sign In to Control Center
+        </button>
+      </form>
+      <div style="text-align:center; margin-top:1.5rem;">
+        <button id="exit-admin-btn" style="background:none; border:none; color:var(--text-muted); font-size:0.8rem; cursor:pointer;">
+          ← Return to Public Website
+        </button>
+      </div>
+    </div>
+
+    <!-- Authenticated Admin Dashboard Layout -->
+    <div class="admin-dashboard-layout" id="admin-dashboard-view" style="display:none;">
+      <!-- Sidebar -->
+      <aside class="admin-sidebar">
+        <div class="admin-sidebar-header">
+          <div class="brand-icon-wrap" style="width:32px; height:32px;">✦</div>
+          <span style="font-family:var(--font-display); font-weight:700; font-size:1.05rem;">BRAIN WAVES</span>
+        </div>
+
+        <ul class="admin-sidebar-nav">
+          <li class="admin-nav-item active">
+            <button data-tab="overview">
+              <span class="tab-icon">📊</span>
+              <span class="tab-label">Overview & Stats</span>
+            </button>
+          </li>
+          <li class="admin-nav-item">
+            <button data-tab="projects">
+              <span class="tab-icon">💼</span>
+              <span class="tab-label">Projects Portfolio</span>
+            </button>
+          </li>
+          <li class="admin-nav-item">
+            <button data-tab="services">
+              <span class="tab-icon">⚡</span>
+              <span class="tab-label">Studio Services</span>
+            </button>
+          </li>
+          <li class="admin-nav-item">
+            <button data-tab="articles">
+              <span class="tab-icon">📰</span>
+              <span class="tab-label">Editorial & Insights</span>
+            </button>
+          </li>
+          <li class="admin-nav-item">
+            <button data-tab="testimonials">
+              <span class="tab-icon">💬</span>
+              <span class="tab-label">Testimonials Klien</span>
+            </button>
+          </li>
+          <li class="admin-nav-item">
+            <button data-tab="inquiries">
+              <span class="tab-icon">📥</span>
+              <span class="tab-label">Inquiries Pipeline</span>
+            </button>
+          </li>
+          <li class="admin-nav-item">
+            <button data-tab="settings">
+              <span class="tab-icon">⚙️</span>
+              <span class="tab-label">Pengaturan Konten Web</span>
+            </button>
+          </li>
+          <li class="admin-nav-item">
+            <button data-tab="logs">
+              <span class="tab-icon">📜</span>
+              <span class="tab-label">Activity Audit Logs</span>
+            </button>
+          </li>
+        </ul>
+
+        <div class="admin-sidebar-footer">
+          <div class="admin-user-info">
+            <span class="admin-user-name" id="admin-username-display">Elena Vance</span>
+            <span class="admin-user-role" id="admin-role-display">CREATIVE DIRECTOR</span>
+          </div>
+          <button class="admin-logout-btn" id="admin-logout-btn" title="Logout">Logout</button>
+        </div>
+      </aside>
+
+      <!-- Main Stage -->
+      <div class="admin-main-stage">
+        <div class="admin-topbar">
+          <h2 class="admin-view-title" id="admin-stage-title">Overview & Stats</h2>
+          <div class="admin-topbar-actions">
+            <button class="btn-exit-admin" onclick="AdminCMS.closePortal()">Exit CMS ↗</button>
+          </div>
+        </div>
+
+        <div class="admin-content-scroll">
+          <!-- Pane 1: Overview -->
+          <div class="admin-tab-pane" id="admin-pane-overview">
+            <div class="admin-kpi-grid">
+              <div class="kpi-card" onclick="AdminCMS.switchTab('inquiries')" style="cursor:pointer;" title="Klik untuk kelola inquiries">
+                <div class="kpi-title">Total Inquiries ↗</div>
+                <div class="kpi-value" id="kpi-inquiries-total">0</div>
+              </div>
+              <div class="kpi-card" onclick="AdminCMS.switchTab('inquiries')" style="cursor:pointer;" title="Klik untuk kelola leads baru">
+                <div class="kpi-title">New Unread Leads ↗</div>
+                <div class="kpi-value" id="kpi-inquiries-new" style="color:var(--neon-cyan);">0</div>
+              </div>
+              <div class="kpi-card" onclick="AdminCMS.switchTab('projects')" style="cursor:pointer;" title="Klik untuk kelola & hapus portofolio proyek">
+                <div class="kpi-title">Published Projects ↗</div>
+                <div class="kpi-value" id="kpi-projects-count">0</div>
+              </div>
+              <div class="kpi-card" onclick="AdminCMS.switchTab('services')" style="cursor:pointer;" title="Klik untuk kelola & hapus layanan studio">
+                <div class="kpi-title">Active Capabilities ↗</div>
+                <div class="kpi-value" id="kpi-services-count">0</div>
+              </div>
+            </div>
+
+            <!-- Quick Access Content Management Hub -->
+            <div style="margin-bottom:2rem;">
+              <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+                <div>
+                  <h3 style="font-family:var(--font-display); font-size:1.15rem; font-weight:700;">Daftar Konten Website Aktif (Akses Cepat Edit & Hapus)</h3>
+                  <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Semua konten yang aktif di website dapat langsung diedit atau dihapus di sini tanpa harus mencari.</p>
+                </div>
+              </div>
+
+              <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem;">
+                <!-- Quick Projects -->
+                <div style="background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:1.25rem;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.5rem;">
+                    <span style="font-size:0.95rem; font-weight:700; color:var(--text-primary);">💼 Portofolio Proyek</span>
+                    <button class="btn-cta-secondary" onclick="AdminCMS.switchTab('projects')" style="padding:0.25rem 0.65rem; font-size:0.72rem;">Buka Tab Proyek ↗</button>
+                  </div>
+                  <div id="overview-projects-list" style="font-size:0.8rem; color:var(--text-secondary);">Memuat proyek...</div>
+                </div>
+
+                <!-- Quick Services -->
+                <div style="background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:1.25rem;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.5rem;">
+                    <span style="font-size:0.95rem; font-weight:700; color:var(--text-primary);">⚡ Layanan Studio</span>
+                    <button class="btn-cta-secondary" onclick="AdminCMS.switchTab('services')" style="padding:0.25rem 0.65rem; font-size:0.72rem;">Buka Tab Layanan ↗</button>
+                  </div>
+                  <div id="overview-services-list" style="font-size:0.8rem; color:var(--text-secondary);">Memuat layanan...</div>
+                </div>
+
+                <!-- Quick Articles -->
+                <div style="background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:1.25rem;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.5rem;">
+                    <span style="font-size:0.95rem; font-weight:700; color:var(--text-primary);">📰 Artikel Editorial</span>
+                    <button class="btn-cta-secondary" onclick="AdminCMS.switchTab('articles')" style="padding:0.25rem 0.65rem; font-size:0.72rem;">Buka Tab Artikel ↗</button>
+                  </div>
+                  <div id="overview-articles-list" style="font-size:0.8rem; color:var(--text-secondary);">Memuat artikel...</div>
+                </div>
+
+                <!-- Quick Testimonials -->
+                <div style="background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:1.25rem;">
+                  <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.5rem;">
+                    <span style="font-size:0.95rem; font-weight:700; color:var(--text-primary);">💬 Testimoni Klien</span>
+                    <button class="btn-cta-secondary" onclick="AdminCMS.switchTab('testimonials')" style="padding:0.25rem 0.65rem; font-size:0.72rem;">Buka Tab Testimoni ↗</button>
+                  </div>
+                  <div id="overview-testimonials-list" style="font-size:0.8rem; color:var(--text-secondary);">Memuat testimoni...</div>
+                </div>
+              </div>
+            </div>
+
+            <div style="background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:1.75rem;">
+              <h3 style="font-family:var(--font-display); font-size:1.15rem; margin-bottom:1rem;">Recent Pipeline Inquiries</h3>
+              <div id="recent-inquiries-snippet">Loading...</div>
+            </div>
+          </div>
+
+          <!-- Pane 2: Projects Manager -->
+          <div class="admin-tab-pane" id="admin-pane-projects" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+              <div>
+                <h3 style="font-size:1.2rem; font-weight:700;">Portfolio Projects & Case Studies</h3>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Buat, edit konten, atau hapus studi kasus portofolio studio.</p>
+              </div>
+              <button class="btn-cta-primary" id="open-add-project-modal-btn" style="padding:0.5rem 1.1rem; font-size:0.8rem;">
+                + Add New Project (Tambah Proyek)
+              </button>
+            </div>
+            <div id="admin-projects-list">Loading projects...</div>
+          </div>
+
+          <!-- Pane 3: Services Manager -->
+          <div class="admin-tab-pane" id="admin-pane-services" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+              <div>
+                <h3 style="font-size:1.2rem; font-weight:700;">Studio Capabilities & Services</h3>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Kelola disiplin layanan, proses pengerjaan, deliverables, dan FAQ.</p>
+              </div>
+              <button class="btn-cta-primary" id="open-add-service-modal-btn" style="padding:0.5rem 1.1rem; font-size:0.8rem;">
+                + Add New Service (Tambah Layanan)
+              </button>
+            </div>
+            <div id="admin-services-list">Loading services...</div>
+          </div>
+
+          <!-- Pane 4: Articles Manager -->
+          <div class="admin-tab-pane" id="admin-pane-articles" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+              <div>
+                <h3 style="font-size:1.2rem; font-weight:700;">Editorial Articles & Insights</h3>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Tulis artikel pemikiran, riset teknis, dan esai inovasi.</p>
+              </div>
+              <button class="btn-cta-primary" id="open-add-article-modal-btn" style="padding:0.5rem 1.1rem; font-size:0.8rem;">
+                + Add New Article (Tulis Artikel)
+              </button>
+            </div>
+            <div id="admin-articles-list">Loading articles...</div>
+          </div>
+
+          <!-- Pane 5: Testimonials Manager -->
+          <div class="admin-tab-pane" id="admin-pane-testimonials" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+              <div>
+                <h3 style="font-size:1.2rem; font-weight:700;">Client Reviews & Endorsements</h3>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Kelola ulasan klien, testimoni pendiri, dan rating reputasi.</p>
+              </div>
+              <button class="btn-cta-primary" id="open-add-testimonial-modal-btn" style="padding:0.5rem 1.1rem; font-size:0.8rem;">
+                + Add New Testimonial (Tambah Testimoni)
+              </button>
+            </div>
+            <div id="admin-testimonials-list">Loading testimonials...</div>
+          </div>
+
+          <!-- Pane 6: Inquiries Pipeline -->
+          <div class="admin-tab-pane" id="admin-pane-inquiries" style="display:none;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+              <div class="filter-pills">
+                <button class="filter-btn inquiry-pipeline-filter active" data-status="all">All Inquiries</button>
+                <button class="filter-btn inquiry-pipeline-filter" data-status="new">New</button>
+                <button class="filter-btn inquiry-pipeline-filter" data-status="contacted">Contacted</button>
+                <button class="filter-btn inquiry-pipeline-filter" data-status="proposal">Proposal</button>
+                <button class="filter-btn inquiry-pipeline-filter" data-status="in_progress">In Progress</button>
+                <button class="filter-btn inquiry-pipeline-filter" data-status="closed">Closed</button>
+              </div>
+            </div>
+
+            <div class="admin-table-container">
+              <table class="admin-table">
+                <thead>
+                  <tr>
+                    <th>Ref / Date</th>
+                    <th>Client / Contact</th>
+                    <th>Scope & Budget</th>
+                    <th>Project Brief</th>
+                    <th>Status</th>
+                    <th>Action</th>
+                  </tr>
+                </thead>
+                <tbody id="admin-inquiries-tbody">
+                  <!-- Populated via AdminCMS -->
+                </tbody>
+              </table>
+            </div>
+          </div>
+
+          <!-- Pane 7: Settings & Hero Editor -->
+          <div class="admin-tab-pane" id="admin-pane-settings" style="display:none;">
+            <div style="max-width:760px; background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:2rem;">
+              <h3 style="font-size:1.2rem; margin-bottom:0.5rem; font-weight:700;">Studio Identity & Website Content Settings</h3>
+              <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1.75rem;">Ubah teks headline Hero, perkenalan studio, kontak, dan status ketersediaan proyek secara live.</p>
+
+              <form id="admin-settings-form">
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                  <div class="form-group">
+                    <label for="setting-studio-name">Studio Public Name</label>
+                    <input type="text" class="form-control" id="setting-studio-name" placeholder="BRAIN WAVES">
+                  </div>
+                  <div class="form-group">
+                    <label for="setting-tagline">Brand Statement / Subtitle</label>
+                    <input type="text" class="form-control" id="setting-tagline" placeholder="CREATIVE STUDIO">
+                  </div>
+                </div>
+
+                <div style="border-top:1px solid var(--border-subtle); margin:1.25rem 0; padding-top:1.25rem;">
+                  <h4 style="font-size:0.95rem; color:var(--neon-cyan); margin-bottom:1rem; font-family:var(--font-mono);">// HERO SECTION HEADLINES</h4>
+                  <div class="form-group">
+                    <label for="setting-hero-h1">Hero Headline Baris 1</label>
+                    <input type="text" class="form-control" id="setting-hero-h1" placeholder="IDEAS ARE JUST THE BEGINNING.">
+                  </div>
+                  <div class="form-group">
+                    <label for="setting-hero-h2">Hero Headline Baris 2 (Gradien Neon)</label>
+                    <input type="text" class="form-control" id="setting-hero-h2" placeholder="WE CREATE WHAT'S NEXT.">
+                  </div>
+                  <div class="form-group">
+                    <label for="setting-hero-sub">Hero Subtitle / Deskripsi Utama</label>
+                    <textarea class="form-control" id="setting-hero-sub" rows="2" placeholder="We engineer visionary brand systems, high-velocity digital products..."></textarea>
+                  </div>
+                </div>
+
+                <div style="border-top:1px solid var(--border-subtle); margin:1.25rem 0; padding-top:1.25rem;">
+                  <h4 style="font-size:0.95rem; color:var(--neon-cyan); margin-bottom:1rem; font-family:var(--font-mono);">// ABOUT STUDIO SECTION</h4>
+                  <div class="form-group">
+                    <label for="setting-about-title">About Section Title</label>
+                    <input type="text" class="form-control" id="setting-about-title" placeholder="Born at the Convergence of Art & Code">
+                  </div>
+                  <div class="form-group">
+                    <label for="setting-about-lead">About Studio Lead Text</label>
+                    <textarea class="form-control" id="setting-about-lead" rows="2" placeholder="BRAIN WAVES is an independent digital creative studio..."></textarea>
+                  </div>
+                </div>
+
+                <div style="border-top:1px solid var(--border-subtle); margin:1.25rem 0; padding-top:1.25rem;">
+                  <h4 style="font-size:0.95rem; color:var(--neon-cyan); margin-bottom:1rem; font-family:var(--font-mono);">// CONTACT & AVAILABILITY</h4>
+                  <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                    <div class="form-group">
+                      <label for="setting-email">Primary Executive Email</label>
+                      <input type="email" class="form-control" id="setting-email" placeholder="hello@brainwaves.studio">
+                    </div>
+                    <div class="form-group">
+                      <label for="setting-location">Headquarters Locations</label>
+                      <input type="text" class="form-control" id="setting-location" placeholder="Jakarta · Tokyo · Zurich">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label for="setting-status">Engagement Availability Status</label>
+                    <input type="text" class="form-control" id="setting-status" placeholder="AVAILABLE FOR Q4 / 2026 ENGAGEMENTS">
+                  </div>
+                </div>
+
+                <button type="submit" class="btn-cta-primary" style="margin-top:1rem;">
+                  Save All Studio Settings (Simpan Pengaturan)
+                </button>
+              </form>
+            </div>
+          </div>
+
+          <!-- Pane 8: Activity Audit Logs -->
+          <div class="admin-tab-pane" id="admin-pane-logs" style="display:none;">
+            <h3 style="font-size:1.1rem; margin-bottom:1.25rem;">System & Administration Audit Trail</h3>
+            <div class="activity-feed-list" id="admin-logs-list">Loading logs...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: PROJECTS (ADD & EDIT)
+       ======================================================== -->
+  <div class="modal-overlay" id="admin-project-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:720px; max-height:90vh; overflow-y:auto;">
+      <div class="modal-header">
+        <h3 style="font-size:1.2rem; font-weight:700;">Add / Edit Project</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-add-project-form">
+          <input type="hidden" id="proj-form-id" value="">
+
+          <div class="form-group">
+            <label for="proj-form-title">Project Title *</label>
+            <input type="text" class="form-control" id="proj-form-title" required placeholder="e.g. OLYMPUS Orbital Logistics">
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="proj-form-client">Client Name *</label>
+              <input type="text" class="form-control" id="proj-form-client" required placeholder="e.g. Olympus Space Systems">
+            </div>
+            <div class="form-group">
+              <label for="proj-form-year">Year *</label>
+              <input type="text" class="form-control" id="proj-form-year" value="2026" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-cat">Discipline Category *</label>
+            <select class="form-control" id="proj-form-cat">
+              <option value="1">Brand Architecture</option>
+              <option value="2">Digital Product Design</option>
+              <option value="3" selected>Web & Immersive 3D</option>
+              <option value="4">AI & Creative Tech</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-summary">Executive Summary *</label>
+            <textarea class="form-control" id="proj-form-summary" rows="2" required placeholder="Concise overview of the challenge and impact..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-challenge">The Challenge *</label>
+            <textarea class="form-control" id="proj-form-challenge" rows="2" required placeholder="Detail the strategic and technical hurdles faced..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-solution">Engineered Solution *</label>
+            <textarea class="form-control" id="proj-form-solution" rows="2" required placeholder="How Brain Waves engineered the breakthrough..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-results">Impact & Verified Metrics *</label>
+            <textarea class="form-control" id="proj-form-results" rows="2" required placeholder="Tangible conversion boosts, user adoption, frame rates..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-tech">Technologies & Frameworks (Pisahkan dengan koma)</label>
+            <input type="text" class="form-control" id="proj-form-tech" placeholder="Three.js, WebGL, Node.js, GSAP, Tailwind">
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-img">Featured Image URL *</label>
+            <input type="url" class="form-control" id="proj-form-img" placeholder="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe">
+          </div>
+
+          <div class="form-group" style="display:flex; align-items:center; gap:0.6rem;">
+            <input type="checkbox" id="proj-form-featured" style="width:18px; height:18px; accent-color:var(--neon-cyan);">
+            <label for="proj-form-featured" style="margin:0; cursor:pointer;">Tampilkan sebagai Proyek Unggulan (Featured Project)</label>
+          </div>
+
+          <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center; margin-top:1rem;">
+            Publish Case Study
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: SERVICES (ADD & EDIT)
+       ======================================================== -->
+  <div class="modal-overlay" id="admin-service-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:680px; max-height:90vh; overflow-y:auto;">
+      <div class="modal-header">
+        <h3 style="font-size:1.2rem; font-weight:700;">Add / Edit Service</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-service-form">
+          <input type="hidden" id="service-form-id" value="">
+
+          <div class="form-group">
+            <label for="service-form-name">Service Name (Nama Layanan) *</label>
+            <input type="text" class="form-control" id="service-form-name" required placeholder="e.g. Sensory UI/UX Systems">
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="service-form-icon">Icon Key</label>
+              <input type="text" class="form-control" id="service-form-icon" value="brain-circuit" placeholder="brain-circuit, layers, cpu, eye, zap">
+            </div>
+            <div class="form-group">
+              <label for="service-form-order">Sort Order (Urutan Tampil)</label>
+              <input type="number" class="form-control" id="service-form-order" value="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="service-form-summary">Summary Singkat *</label>
+            <input type="text" class="form-control" id="service-form-summary" required placeholder="Ringkasan 1-2 kalimat untuk kartu depan...">
+          </div>
+
+          <div class="form-group">
+            <label for="service-form-desc">Full Description (Deskripsi Lengkap Spesifikasi) *</label>
+            <textarea class="form-control" id="service-form-desc" rows="3" required placeholder="Jelaskan metodologi dan ruang lingkup mendalam..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="service-form-deliverables">Deliverables & Luaran (1 item per baris)</label>
+            <textarea class="form-control" id="service-form-deliverables" rows="3" placeholder="Design Token Architecture&#10;Figma Master Component Library&#10;Motion Guidelines Specification"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="service-form-steps">Execution Phases (1 tahap per baris)</label>
+            <textarea class="form-control" id="service-form-steps" rows="3" placeholder="Phase 1: Cognitive Audit & Research&#10;Phase 2: Tactile Prototyping&#10;Phase 3: Production Delivery"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="service-form-published">Status Publikasi</label>
+            <select class="form-control" id="service-form-published">
+              <option value="1">Aktif / Published (Tampil di Web)</option>
+              <option value="0">Draft / Hidden</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center; margin-top:1rem;">
+            Simpan Layanan
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: ARTICLES (ADD & EDIT)
+       ======================================================== -->
+  <div class="modal-overlay" id="admin-article-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:720px; max-height:90vh; overflow-y:auto;">
+      <div class="modal-header">
+        <h3 style="font-size:1.2rem; font-weight:700;">Add / Edit Article</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-article-form">
+          <input type="hidden" id="article-form-id" value="">
+
+          <div class="form-group">
+            <label for="article-form-title">Article Title *</label>
+            <input type="text" class="form-control" id="article-form-title" required placeholder="e.g. The Death of Flat Web: Engineering Sensory 3D Spaces">
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="article-form-cat">Category *</label>
+              <input type="text" class="form-control" id="article-form-cat" value="Design Engineering" required>
+            </div>
+            <div class="form-group">
+              <label for="article-form-author">Author *</label>
+              <input type="text" class="form-control" id="article-form-author" value="BRAIN WAVES Editorial" required>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="article-form-time">Read Time *</label>
+              <input type="text" class="form-control" id="article-form-time" value="5 min read" required>
+            </div>
+            <div class="form-group">
+              <label for="article-form-status">Status</label>
+              <select class="form-control" id="article-form-status">
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="article-form-img">Cover Image URL *</label>
+            <input type="url" class="form-control" id="article-form-img" placeholder="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe">
+          </div>
+
+          <div class="form-group">
+            <label for="article-form-excerpt">Excerpt / Ringkasan Singkat *</label>
+            <textarea class="form-control" id="article-form-excerpt" rows="2" required placeholder="Ringkasan 1-2 kalimat untuk feed artikel..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="article-form-body">Isi Artikel Lengkap (HTML atau Paragraf) *</label>
+            <textarea class="form-control" id="article-form-body" rows="6" required placeholder="Tuliskan isi artikel dan analisis mendalam di sini..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center; margin-top:1rem;">
+            Simpan Artikel
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: TESTIMONIALS (ADD & EDIT)
+       ======================================================== -->
+  <div class="modal-overlay" id="admin-testimonial-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:600px;">
+      <div class="modal-header">
+        <h3 style="font-size:1.2rem; font-weight:700;">Add / Edit Testimonial</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-testimonial-form">
+          <input type="hidden" id="testi-form-id" value="">
+
+          <div class="form-group">
+            <label for="testi-form-name">Client Name (Nama Klien) *</label>
+            <input type="text" class="form-control" id="testi-form-name" required placeholder="e.g. Marcus Sterling">
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="testi-form-title">Role / Jabatan *</label>
+              <input type="text" class="form-control" id="testi-form-title" required placeholder="e.g. VP of Product">
+            </div>
+            <div class="form-group">
+              <label for="testi-form-company">Company / Perusahaan *</label>
+              <input type="text" class="form-control" id="testi-form-company" required placeholder="e.g. Quantum Aerospace">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="testi-form-quote">Quote / Ulasan Klien *</label>
+            <textarea class="form-control" id="testi-form-quote" rows="3" required placeholder="Pendapat klien mengenai kolaborasi bersama Brain Waves..."></textarea>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="testi-form-rating">Rating (1-5)</label>
+              <select class="form-control" id="testi-form-rating">
+                <option value="5">★★★★★ (5)</option>
+                <option value="4">★★★★☆ (4)</option>
+                <option value="3">★★★☆☆ (3)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="testi-form-order">Urutan Tampil</label>
+              <input type="number" class="form-control" id="testi-form-order" value="1">
+            </div>
+            <div class="form-group">
+              <label for="testi-form-published">Status</label>
+              <select class="form-control" id="testi-form-published">
+                <option value="1">Tampil di Web</option>
+                <option value="0">Disembunyikan</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center; margin-top:1rem;">
+            Simpan Testimonial
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Inquiry Notes Drawer -->
+  <div class="modal-overlay" id="inquiry-notes-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:560px;">
+      <div class="modal-header">
+        <div>
+          <span style="font-size:0.75rem; color:var(--neon-cyan); font-family:var(--font-mono);">INTERNAL PIPELINE NOTES</span>
+          <h3 id="notes-modal-ref" style="font-size:1.05rem; font-weight:700;">Ref</h3>
+        </div>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="notes-modal-list" style="margin-bottom:1.5rem; max-height:240px; overflow-y:auto;"></div>
+
+        <form id="add-note-form">
+          <div class="form-group">
+            <label for="new-note-input">Add Internal Follow-up Note</label>
+            <textarea class="form-control" id="new-note-input" rows="3" placeholder="e.g. Sent technical NDA to client, waiting for compliance review..." required></textarea>
+          </div>
+          <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center;">
+            Add Note
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- ========================================================
+       FLOATING CYBER MUSIC PLAYER DOCK
+       ======================================================== -->
+  <!-- ========================================================
+       FLOATING BOTTOM CYBER MUSIC DOCK
+       ======================================================== -->
+  <aside class="cyber-music-dock" id="cyber-music-player" aria-label="Cyber Music Player">
+    <!-- Collapsed Floating Pill -->
+    <button class="music-dock-pill" id="music-dock-toggle-pill" onclick="BrainWavesMusic.toggleWidgetCollapse()" title="Buka Panel Musik Cyber">
+      <div class="dock-pill-waves">
+        <span></span><span></span><span></span><span></span>
+      </div>
+      <span class="dock-pill-label" id="dock-pill-track-name">🎵 Neural Drift</span>
+      <span class="dock-pill-status">ONLINE</span>
+    </button>
+
+    <!-- Hanging Bottom Player Bar -->
+    <div class="music-player-bar">
+      <!-- Left: Disc / Status + Track Info -->
+      <div class="music-bar-left">
+        <div class="music-disc-avatar">
+          <span class="disc-pulse-core">⚡</span>
+        </div>
+        <div class="music-bar-meta">
+          <span class="music-track-name" id="music-track-title">Neural Drift</span>
+          <span class="music-track-sub" id="music-track-genre">Cyber Synthwave · 110 BPM</span>
+        </div>
+      </div>
+
+      <!-- Center: Equalizer Visualizer + Transport Controls -->
+      <div class="music-bar-center">
+        <!-- Visualizer Canvas -->
+        <div class="music-visualizer-container">
+          <canvas id="music-visualizer-canvas" width="80" height="24"></canvas>
+        </div>
+
+        <div class="music-playback-controls">
+          <button class="music-ctrl-btn" onclick="BrainWavesMusic.prevTrack()" title="Track Sebelumnya">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="19 20 9 12 19 4 19 20"/><line x1="5" y1="19" x2="5" y2="5"/></svg>
+          </button>
+          <button class="music-play-btn" id="music-play-btn" onclick="BrainWavesMusic.togglePlay()" title="Putar Musik Cyber (Play / Pause)">
+            <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor"><polygon points="6 4 20 12 6 20 6 4"/></svg>
+          </button>
+          <button class="music-ctrl-btn" onclick="BrainWavesMusic.nextTrack()" title="Track Berikutnya">
+            <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polygon points="5 4 15 12 5 20 5 4"/><line x1="19" y1="5" x2="19" y2="19"/></svg>
+          </button>
+        </div>
+      </div>
+
+      <!-- Right: Track Chips + Volume + Minimize -->
+      <div class="music-bar-right">
+        <div class="music-track-chips">
+          <button class="music-pill-track active" onclick="BrainWavesMusic.setTrack(0)">Synthwave</button>
+          <button class="music-pill-track" onclick="BrainWavesMusic.setTrack(1)">Ambient</button>
+          <button class="music-pill-track" onclick="BrainWavesMusic.setTrack(2)">Chillwave</button>
+          <button class="music-pill-track" onclick="BrainWavesMusic.setTrack(3)">Darksynth</button>
+        </div>
+
+        <div class="music-volume-group">
+          <button class="music-vol-icon-btn" id="music-mute-btn" onclick="BrainWavesMusic.toggleMute()" title="Mute / Unmute">
+            🔊
+          </button>
+          <input type="range" class="music-volume-range" id="music-volume-slider" min="0" max="1" step="0.05" value="0.45" oninput="BrainWavesMusic.setVolume(this.value)" title="Volume Musik" />
+        </div>
+
+        <button class="music-icon-btn" onclick="BrainWavesMusic.toggleWidgetCollapse()" title="Sembunyikan / Minimize Player" aria-label="Minimize Player">
+          <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="5" y1="12" x2="19" y2="12"/></svg>
+        </button>
+      </div>
+    </div>
+  </aside>
+
+  <!-- Toast Notification Container -->
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/default-data.js"></script>
+  <script src="js/client-storage.js"></script>
+  <script src="js/i18n.js"></script>
+  <script src="js/audio-fx.js"></script>
+  <script src="js/music-player.js"></script>
+  <script src="js/canvas-neural-3d.js"></script>
+  <script src="js/project-builder.js"></script>
+  <script src="js/admin-cms.js"></script>
+  <script src="js/app.js"></script>
+</body>
+</html>

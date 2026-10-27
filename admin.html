@@ -1,0 +1,669 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Control Center — BRAIN WAVES Admin CMS</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 24 24' fill='%2365F5FF'><path d='M12 2a10 10 0 1 0 10 10A10 10 0 0 0 12 2zm1 14.93V18h-2v-1.07A6 6 0 0 1 7.07 13H8a4 4 0 0 0 7.93 0h.93a6 6 0 0 1-3.86 3.93z'/></svg>">
+  <link rel="stylesheet" href="css/design-tokens.css">
+  <link rel="stylesheet" href="css/main.css">
+  <link rel="stylesheet" href="css/admin.css">
+</head>
+<body style="background:#080911; overflow:hidden;">
+
+  <div class="admin-dashboard-layout" id="admin-dashboard-view">
+    <!-- Sidebar -->
+    <aside class="admin-sidebar">
+      <div class="admin-sidebar-header">
+        <a href="/" style="display:flex; align-items:center; gap:0.75rem; text-decoration:none;">
+          <div class="brand-icon-wrap" style="width:34px; height:34px; font-size:1.1rem;">✦</div>
+          <span style="font-family:var(--font-display); font-weight:700; font-size:1.1rem; color:var(--text-primary);">BRAIN WAVES</span>
+        </a>
+      </div>
+
+      <ul class="admin-sidebar-nav">
+        <li class="admin-nav-item active">
+          <button data-tab="overview">
+            <span class="tab-icon">📊</span>
+            <span class="tab-label">Overview & Stats</span>
+          </button>
+        </li>
+        <li class="admin-nav-item">
+          <button data-tab="projects">
+            <span class="tab-icon">💼</span>
+            <span class="tab-label">Projects / Karya</span>
+          </button>
+        </li>
+        <li class="admin-nav-item">
+          <button data-tab="services">
+            <span class="tab-icon">⚡</span>
+            <span class="tab-label">Services / Layanan</span>
+          </button>
+        </li>
+        <li class="admin-nav-item">
+          <button data-tab="articles">
+            <span class="tab-icon">📰</span>
+            <span class="tab-label">Articles / Wawasan</span>
+          </button>
+        </li>
+        <li class="admin-nav-item">
+          <button data-tab="testimonials">
+            <span class="tab-icon">💬</span>
+            <span class="tab-label">Testimonials Klien</span>
+          </button>
+        </li>
+        <li class="admin-nav-item">
+          <button data-tab="inquiries">
+            <span class="tab-icon">📥</span>
+            <span class="tab-label">Inquiries Pipeline</span>
+          </button>
+        </li>
+        <li class="admin-nav-item">
+          <button data-tab="settings">
+            <span class="tab-icon">⚙️</span>
+            <span class="tab-label">Pengaturan Konten Web</span>
+          </button>
+        </li>
+        <li class="admin-nav-item">
+          <button data-tab="logs">
+            <span class="tab-icon">📜</span>
+            <span class="tab-label">Activity Audit Logs</span>
+          </button>
+        </li>
+      </ul>
+
+      <div class="admin-sidebar-footer">
+        <div class="admin-user-info">
+          <span class="admin-user-name" id="admin-username-display">Elena Vance</span>
+          <span class="admin-user-role" id="admin-role-display">CREATIVE DIRECTOR</span>
+        </div>
+        <button class="admin-logout-btn" id="admin-logout-btn" title="Logout">Logout</button>
+      </div>
+    </aside>
+
+    <!-- Main Stage -->
+    <div class="admin-main-stage">
+      <div class="admin-topbar">
+        <h2 class="admin-view-title" id="admin-stage-title">Overview & Stats</h2>
+        <div class="admin-topbar-actions">
+          <a href="/" class="btn-exit-admin" target="_blank">Lihat Website ↗</a>
+        </div>
+      </div>
+
+      <div class="admin-content-scroll">
+        <!-- Pane 1: Overview -->
+        <div class="admin-tab-pane" id="admin-pane-overview">
+          <div class="admin-kpi-grid">
+            <div class="kpi-card" onclick="AdminCMS.switchTab('inquiries')" style="cursor:pointer;" title="Klik untuk kelola inquiries">
+              <div class="kpi-title">Total Inquiries ↗</div>
+              <div class="kpi-value" id="kpi-inquiries-total">0</div>
+            </div>
+            <div class="kpi-card" onclick="AdminCMS.switchTab('inquiries')" style="cursor:pointer;" title="Klik untuk kelola leads baru">
+              <div class="kpi-title">New Unread Leads ↗</div>
+              <div class="kpi-value" id="kpi-inquiries-new" style="color:var(--neon-cyan);">0</div>
+            </div>
+            <div class="kpi-card" onclick="AdminCMS.switchTab('projects')" style="cursor:pointer;" title="Klik untuk kelola & hapus portofolio proyek">
+              <div class="kpi-title">Published Projects ↗</div>
+              <div class="kpi-value" id="kpi-projects-count">0</div>
+            </div>
+            <div class="kpi-card" onclick="AdminCMS.switchTab('services')" style="cursor:pointer;" title="Klik untuk kelola & hapus layanan studio">
+              <div class="kpi-title">Active Capabilities ↗</div>
+              <div class="kpi-value" id="kpi-services-count">0</div>
+            </div>
+          </div>
+
+          <!-- Quick Access Content Management Hub -->
+          <div style="margin-bottom:2rem;">
+            <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1rem; flex-wrap:wrap; gap:0.5rem;">
+              <div>
+                <h3 style="font-family:var(--font-display); font-size:1.15rem; font-weight:700;">Daftar Konten Website Aktif (Akses Cepat Edit & Hapus)</h3>
+                <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Semua konten yang aktif di website dapat langsung diedit atau dihapus di sini tanpa harus mencari.</p>
+              </div>
+            </div>
+
+            <div style="display:grid; grid-template-columns:repeat(auto-fit, minmax(280px, 1fr)); gap:1.25rem;">
+              <!-- Quick Projects -->
+              <div style="background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:1.25rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.5rem;">
+                  <span style="font-size:0.95rem; font-weight:700; color:var(--text-primary);">💼 Portofolio Proyek</span>
+                  <button class="btn-cta-secondary" onclick="AdminCMS.switchTab('projects')" style="padding:0.25rem 0.65rem; font-size:0.72rem;">Buka Tab Proyek ↗</button>
+                </div>
+                <div id="overview-projects-list" style="font-size:0.8rem; color:var(--text-secondary);">Memuat proyek...</div>
+              </div>
+
+              <!-- Quick Services -->
+              <div style="background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:1.25rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.5rem;">
+                  <span style="font-size:0.95rem; font-weight:700; color:var(--text-primary);">⚡ Layanan Studio</span>
+                  <button class="btn-cta-secondary" onclick="AdminCMS.switchTab('services')" style="padding:0.25rem 0.65rem; font-size:0.72rem;">Buka Tab Layanan ↗</button>
+                </div>
+                <div id="overview-services-list" style="font-size:0.8rem; color:var(--text-secondary);">Memuat layanan...</div>
+              </div>
+
+              <!-- Quick Articles -->
+              <div style="background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:1.25rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.5rem;">
+                  <span style="font-size:0.95rem; font-weight:700; color:var(--text-primary);">📰 Artikel Editorial</span>
+                  <button class="btn-cta-secondary" onclick="AdminCMS.switchTab('articles')" style="padding:0.25rem 0.65rem; font-size:0.72rem;">Buka Tab Artikel ↗</button>
+                </div>
+                <div id="overview-articles-list" style="font-size:0.8rem; color:var(--text-secondary);">Memuat artikel...</div>
+              </div>
+
+              <!-- Quick Testimonials -->
+              <div style="background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:1.25rem;">
+                <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:0.75rem; border-bottom:1px solid var(--border-subtle); padding-bottom:0.5rem;">
+                  <span style="font-size:0.95rem; font-weight:700; color:var(--text-primary);">💬 Testimoni Klien</span>
+                  <button class="btn-cta-secondary" onclick="AdminCMS.switchTab('testimonials')" style="padding:0.25rem 0.65rem; font-size:0.72rem;">Buka Tab Testimoni ↗</button>
+                </div>
+                <div id="overview-testimonials-list" style="font-size:0.8rem; color:var(--text-secondary);">Memuat testimoni...</div>
+              </div>
+            </div>
+          </div>
+
+          <div style="background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:1.75rem;">
+            <h3 style="font-family:var(--font-display); font-size:1.15rem; margin-bottom:1rem;">Recent Pipeline Inquiries</h3>
+            <div id="recent-inquiries-snippet">Loading...</div>
+          </div>
+        </div>
+
+        <!-- Pane 2: Projects Manager -->
+        <div class="admin-tab-pane" id="admin-pane-projects" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:700;">Portfolio Projects & Case Studies</h3>
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Buat, edit konten, atau hapus studi kasus portofolio studio.</p>
+            </div>
+            <button class="btn-cta-primary" id="open-add-project-modal-btn" style="padding:0.5rem 1.1rem; font-size:0.8rem;">
+              + Add New Project (Tambah Proyek)
+            </button>
+          </div>
+          <div id="admin-projects-list">Loading projects...</div>
+        </div>
+
+        <!-- Pane 3: Services Manager -->
+        <div class="admin-tab-pane" id="admin-pane-services" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:700;">Studio Capabilities & Services</h3>
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Kelola disiplin layanan, proses pengerjaan, deliverables, dan FAQ.</p>
+            </div>
+            <button class="btn-cta-primary" id="open-add-service-modal-btn" style="padding:0.5rem 1.1rem; font-size:0.8rem;">
+              + Add New Service (Tambah Layanan)
+            </button>
+          </div>
+          <div id="admin-services-list">Loading services...</div>
+        </div>
+
+        <!-- Pane 4: Articles Manager -->
+        <div class="admin-tab-pane" id="admin-pane-articles" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:700;">Editorial Articles & Insights</h3>
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Tulis artikel pemikiran, riset teknis, dan esai inovasi.</p>
+            </div>
+            <button class="btn-cta-primary" id="open-add-article-modal-btn" style="padding:0.5rem 1.1rem; font-size:0.8rem;">
+              + Add New Article (Tulis Artikel)
+            </button>
+          </div>
+          <div id="admin-articles-list">Loading articles...</div>
+        </div>
+
+        <!-- Pane 5: Testimonials Manager -->
+        <div class="admin-tab-pane" id="admin-pane-testimonials" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+            <div>
+              <h3 style="font-size:1.2rem; font-weight:700;">Client Reviews & Endorsements</h3>
+              <p style="font-size:0.8rem; color:var(--text-muted); margin-top:2px;">Kelola ulasan klien, testimoni pendiri, dan rating reputasi.</p>
+            </div>
+            <button class="btn-cta-primary" id="open-add-testimonial-modal-btn" style="padding:0.5rem 1.1rem; font-size:0.8rem;">
+              + Add New Testimonial (Tambah Testimoni)
+            </button>
+          </div>
+          <div id="admin-testimonials-list">Loading testimonials...</div>
+        </div>
+
+        <!-- Pane 6: Inquiries Pipeline -->
+        <div class="admin-tab-pane" id="admin-pane-inquiries" style="display:none;">
+          <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:1.5rem; flex-wrap:wrap; gap:1rem;">
+            <div class="filter-pills">
+              <button class="filter-btn inquiry-pipeline-filter active" data-status="all">All Inquiries</button>
+              <button class="filter-btn inquiry-pipeline-filter" data-status="new">New</button>
+              <button class="filter-btn inquiry-pipeline-filter" data-status="contacted">Contacted</button>
+              <button class="filter-btn inquiry-pipeline-filter" data-status="proposal">Proposal</button>
+              <button class="filter-btn inquiry-pipeline-filter" data-status="in_progress">In Progress</button>
+              <button class="filter-btn inquiry-pipeline-filter" data-status="closed">Closed</button>
+            </div>
+          </div>
+
+          <div class="admin-table-container">
+            <table class="admin-table">
+              <thead>
+                <tr>
+                  <th>Ref / Date</th>
+                  <th>Client / Contact</th>
+                  <th>Scope & Budget</th>
+                  <th>Project Brief</th>
+                  <th>Status</th>
+                  <th>Action</th>
+                </tr>
+              </thead>
+              <tbody id="admin-inquiries-tbody">
+                <!-- Populated via AdminCMS -->
+              </tbody>
+            </table>
+          </div>
+        </div>
+
+        <!-- Pane 7: Settings & Hero Editor -->
+        <div class="admin-tab-pane" id="admin-pane-settings" style="display:none;">
+          <div style="max-width:760px; background:var(--surface-dark); border:1px solid var(--border-card); border-radius:var(--radius-lg); padding:2rem;">
+            <h3 style="font-size:1.2rem; margin-bottom:0.5rem; font-weight:700;">Studio Identity & Website Content Settings</h3>
+            <p style="font-size:0.85rem; color:var(--text-secondary); margin-bottom:1.75rem;">Ubah teks headline Hero, perkenalan studio, kontak, dan status ketersediaan proyek secara live.</p>
+
+            <form id="admin-settings-form">
+              <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                <div class="form-group">
+                  <label for="setting-studio-name">Studio Public Name</label>
+                  <input type="text" class="form-control" id="setting-studio-name" placeholder="BRAIN WAVES">
+                </div>
+                <div class="form-group">
+                  <label for="setting-tagline">Brand Statement / Subtitle</label>
+                  <input type="text" class="form-control" id="setting-tagline" placeholder="CREATIVE STUDIO">
+                </div>
+              </div>
+
+              <div style="border-top:1px solid var(--border-subtle); margin:1.25rem 0; padding-top:1.25rem;">
+                <h4 style="font-size:0.95rem; color:var(--neon-cyan); margin-bottom:1rem; font-family:var(--font-mono);">// HERO SECTION HEADLINES</h4>
+                <div class="form-group">
+                  <label for="setting-hero-h1">Hero Headline Baris 1</label>
+                  <input type="text" class="form-control" id="setting-hero-h1" placeholder="IDEAS ARE JUST THE BEGINNING.">
+                </div>
+                <div class="form-group">
+                  <label for="setting-hero-h2">Hero Headline Baris 2 (Gradien Neon)</label>
+                  <input type="text" class="form-control" id="setting-hero-h2" placeholder="WE CREATE WHAT'S NEXT.">
+                </div>
+                <div class="form-group">
+                  <label for="setting-hero-sub">Hero Subtitle / Deskripsi Utama</label>
+                  <textarea class="form-control" id="setting-hero-sub" rows="2" placeholder="We engineer visionary brand systems, high-velocity digital products..."></textarea>
+                </div>
+              </div>
+
+              <div style="border-top:1px solid var(--border-subtle); margin:1.25rem 0; padding-top:1.25rem;">
+                <h4 style="font-size:0.95rem; color:var(--neon-cyan); margin-bottom:1rem; font-family:var(--font-mono);">// ABOUT STUDIO SECTION</h4>
+                <div class="form-group">
+                  <label for="setting-about-title">About Section Title</label>
+                  <input type="text" class="form-control" id="setting-about-title" placeholder="Born at the Convergence of Art & Code">
+                </div>
+                <div class="form-group">
+                  <label for="setting-about-lead">About Studio Lead Text</label>
+                  <textarea class="form-control" id="setting-about-lead" rows="2" placeholder="BRAIN WAVES is an independent digital creative studio..."></textarea>
+                </div>
+              </div>
+
+              <div style="border-top:1px solid var(--border-subtle); margin:1.25rem 0; padding-top:1.25rem;">
+                <h4 style="font-size:0.95rem; color:var(--neon-cyan); margin-bottom:1rem; font-family:var(--font-mono);">// CONTACT & AVAILABILITY</h4>
+                <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+                  <div class="form-group">
+                    <label for="setting-email">Primary Executive Email</label>
+                    <input type="email" class="form-control" id="setting-email" placeholder="hello@brainwaves.studio">
+                  </div>
+                  <div class="form-group">
+                    <label for="setting-location">Headquarters Locations</label>
+                    <input type="text" class="form-control" id="setting-location" placeholder="Jakarta · Tokyo · Zurich">
+                  </div>
+                </div>
+                <div class="form-group">
+                  <label for="setting-status">Engagement Availability Status</label>
+                  <input type="text" class="form-control" id="setting-status" placeholder="AVAILABLE FOR Q4 / 2026 ENGAGEMENTS">
+                </div>
+              </div>
+
+              <button type="submit" class="btn-cta-primary" style="margin-top:1rem;">
+                Save All Studio Settings (Simpan Pengaturan)
+              </button>
+            </form>
+          </div>
+        </div>
+
+        <!-- Pane 8: Activity Audit Logs -->
+        <div class="admin-tab-pane" id="admin-pane-logs" style="display:none;">
+          <h3 style="font-size:1.1rem; margin-bottom:1.25rem;">System & Administration Audit Trail</h3>
+          <div class="activity-feed-list" id="admin-logs-list">Loading logs...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: PROJECTS (ADD & EDIT)
+       ======================================================== -->
+  <div class="modal-overlay" id="admin-project-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:720px; max-height:90vh; overflow-y:auto;">
+      <div class="modal-header">
+        <h3 style="font-size:1.2rem; font-weight:700;">Add / Edit Project</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-add-project-form">
+          <input type="hidden" id="proj-form-id" value="">
+
+          <div class="form-group">
+            <label for="proj-form-title">Project Title *</label>
+            <input type="text" class="form-control" id="proj-form-title" required placeholder="e.g. OLYMPUS Orbital Logistics">
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="proj-form-client">Client Name *</label>
+              <input type="text" class="form-control" id="proj-form-client" required placeholder="e.g. Olympus Space Systems">
+            </div>
+            <div class="form-group">
+              <label for="proj-form-year">Year *</label>
+              <input type="text" class="form-control" id="proj-form-year" value="2026" required>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-cat">Discipline Category *</label>
+            <select class="form-control" id="proj-form-cat">
+              <option value="1">Brand Architecture</option>
+              <option value="2">Digital Product Design</option>
+              <option value="3" selected>Web & Immersive 3D</option>
+              <option value="4">AI & Creative Tech</option>
+            </select>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-summary">Executive Summary *</label>
+            <textarea class="form-control" id="proj-form-summary" rows="2" required placeholder="Concise overview of the challenge and impact..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-challenge">The Challenge *</label>
+            <textarea class="form-control" id="proj-form-challenge" rows="2" required placeholder="Detail the strategic and technical hurdles faced..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-solution">Engineered Solution *</label>
+            <textarea class="form-control" id="proj-form-solution" rows="2" required placeholder="How Brain Waves engineered the breakthrough..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-results">Impact & Verified Metrics *</label>
+            <textarea class="form-control" id="proj-form-results" rows="2" required placeholder="Tangible conversion boosts, user adoption, frame rates..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-tech">Technologies & Frameworks (Pisahkan dengan koma)</label>
+            <input type="text" class="form-control" id="proj-form-tech" placeholder="Three.js, WebGL, Node.js, GSAP, Tailwind">
+          </div>
+
+          <div class="form-group">
+            <label for="proj-form-img">Featured Image URL *</label>
+            <input type="url" class="form-control" id="proj-form-img" placeholder="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe">
+          </div>
+
+          <div class="form-group" style="display:flex; align-items:center; gap:0.6rem;">
+            <input type="checkbox" id="proj-form-featured" style="width:18px; height:18px; accent-color:var(--neon-cyan);">
+            <label for="proj-form-featured" style="margin:0; cursor:pointer;">Tampilkan sebagai Proyek Unggulan (Featured Project)</label>
+          </div>
+
+          <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center; margin-top:1rem;">
+            Publish Case Study
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: SERVICES (ADD & EDIT)
+       ======================================================== -->
+  <div class="modal-overlay" id="admin-service-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:680px; max-height:90vh; overflow-y:auto;">
+      <div class="modal-header">
+        <h3 style="font-size:1.2rem; font-weight:700;">Add / Edit Service</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-service-form">
+          <input type="hidden" id="service-form-id" value="">
+
+          <div class="form-group">
+            <label for="service-form-name">Service Name (Nama Layanan) *</label>
+            <input type="text" class="form-control" id="service-form-name" required placeholder="e.g. Sensory UI/UX Systems">
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="service-form-icon">Icon Key</label>
+              <input type="text" class="form-control" id="service-form-icon" value="brain-circuit" placeholder="brain-circuit, layers, cpu, eye, zap">
+            </div>
+            <div class="form-group">
+              <label for="service-form-order">Sort Order (Urutan Tampil)</label>
+              <input type="number" class="form-control" id="service-form-order" value="1">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="service-form-summary">Summary Singkat *</label>
+            <input type="text" class="form-control" id="service-form-summary" required placeholder="Ringkasan 1-2 kalimat untuk kartu depan...">
+          </div>
+
+          <div class="form-group">
+            <label for="service-form-desc">Full Description (Deskripsi Lengkap Spesifikasi) *</label>
+            <textarea class="form-control" id="service-form-desc" rows="3" required placeholder="Jelaskan metodologi dan ruang lingkup mendalam..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="service-form-deliverables">Deliverables & Luaran (1 item per baris)</label>
+            <textarea class="form-control" id="service-form-deliverables" rows="3" placeholder="Design Token Architecture&#10;Figma Master Component Library&#10;Motion Guidelines Specification"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="service-form-steps">Execution Phases (1 tahap per baris)</label>
+            <textarea class="form-control" id="service-form-steps" rows="3" placeholder="Phase 1: Cognitive Audit & Research&#10;Phase 2: Tactile Prototyping&#10;Phase 3: Production Delivery"></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="service-form-published">Status Publikasi</label>
+            <select class="form-control" id="service-form-published">
+              <option value="1">Aktif / Published (Tampil di Web)</option>
+              <option value="0">Draft / Hidden</option>
+            </select>
+          </div>
+
+          <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center; margin-top:1rem;">
+            Simpan Layanan
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: ARTICLES (ADD & EDIT)
+       ======================================================== -->
+  <div class="modal-overlay" id="admin-article-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:720px; max-height:90vh; overflow-y:auto;">
+      <div class="modal-header">
+        <h3 style="font-size:1.2rem; font-weight:700;">Add / Edit Article</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-article-form">
+          <input type="hidden" id="article-form-id" value="">
+
+          <div class="form-group">
+            <label for="article-form-title">Article Title *</label>
+            <input type="text" class="form-control" id="article-form-title" required placeholder="e.g. The Death of Flat Web: Engineering Sensory 3D Spaces">
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="article-form-cat">Category *</label>
+              <input type="text" class="form-control" id="article-form-cat" value="Design Engineering" required>
+            </div>
+            <div class="form-group">
+              <label for="article-form-author">Author *</label>
+              <input type="text" class="form-control" id="article-form-author" value="BRAIN WAVES Editorial" required>
+            </div>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="article-form-time">Read Time *</label>
+              <input type="text" class="form-control" id="article-form-time" value="5 min read" required>
+            </div>
+            <div class="form-group">
+              <label for="article-form-status">Status</label>
+              <select class="form-control" id="article-form-status">
+                <option value="published">Published</option>
+                <option value="draft">Draft</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="article-form-img">Cover Image URL *</label>
+            <input type="url" class="form-control" id="article-form-img" placeholder="https://images.unsplash.com/photo-1618005182384-a83a8bd57fbe">
+          </div>
+
+          <div class="form-group">
+            <label for="article-form-excerpt">Excerpt / Ringkasan Singkat *</label>
+            <textarea class="form-control" id="article-form-excerpt" rows="2" required placeholder="Ringkasan 1-2 kalimat untuk feed artikel..."></textarea>
+          </div>
+
+          <div class="form-group">
+            <label for="article-form-body">Isi Artikel Lengkap (HTML atau Paragraf) *</label>
+            <textarea class="form-control" id="article-form-body" rows="6" required placeholder="Tuliskan isi artikel dan analisis mendalam di sini..."></textarea>
+          </div>
+
+          <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center; margin-top:1rem;">
+            Simpan Artikel
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- ========================================================
+       MODALS: TESTIMONIALS (ADD & EDIT)
+       ======================================================== -->
+  <div class="modal-overlay" id="admin-testimonial-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:600px;">
+      <div class="modal-header">
+        <h3 style="font-size:1.2rem; font-weight:700;">Add / Edit Testimonial</h3>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <form id="admin-testimonial-form">
+          <input type="hidden" id="testi-form-id" value="">
+
+          <div class="form-group">
+            <label for="testi-form-name">Client Name (Nama Klien) *</label>
+            <input type="text" class="form-control" id="testi-form-name" required placeholder="e.g. Marcus Sterling">
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="testi-form-title">Role / Jabatan *</label>
+              <input type="text" class="form-control" id="testi-form-title" required placeholder="e.g. VP of Product">
+            </div>
+            <div class="form-group">
+              <label for="testi-form-company">Company / Perusahaan *</label>
+              <input type="text" class="form-control" id="testi-form-company" required placeholder="e.g. Quantum Aerospace">
+            </div>
+          </div>
+
+          <div class="form-group">
+            <label for="testi-form-quote">Quote / Ulasan Klien *</label>
+            <textarea class="form-control" id="testi-form-quote" rows="3" required placeholder="Pendapat klien mengenai kolaborasi bersama Brain Waves..."></textarea>
+          </div>
+
+          <div style="display:grid; grid-template-columns:1fr 1fr 1fr; gap:1rem;">
+            <div class="form-group">
+              <label for="testi-form-rating">Rating (1-5)</label>
+              <select class="form-control" id="testi-form-rating">
+                <option value="5">★★★★★ (5)</option>
+                <option value="4">★★★★☆ (4)</option>
+                <option value="3">★★★☆☆ (3)</option>
+              </select>
+            </div>
+            <div class="form-group">
+              <label for="testi-form-order">Urutan Tampil</label>
+              <input type="number" class="form-control" id="testi-form-order" value="1">
+            </div>
+            <div class="form-group">
+              <label for="testi-form-published">Status</label>
+              <select class="form-control" id="testi-form-published">
+                <option value="1">Tampil di Web</option>
+                <option value="0">Disembunyikan</option>
+              </select>
+            </div>
+          </div>
+
+          <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center; margin-top:1rem;">
+            Simpan Testimonial
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Inquiry Notes Drawer -->
+  <div class="modal-overlay" id="inquiry-notes-modal" role="dialog" aria-modal="true">
+    <div class="modal-box" style="max-width:560px;">
+      <div class="modal-header">
+        <div>
+          <span style="font-size:0.75rem; color:var(--neon-cyan); font-family:var(--font-mono);">INTERNAL PIPELINE NOTES</span>
+          <h3 id="notes-modal-ref" style="font-size:1.05rem; font-weight:700;">Ref</h3>
+        </div>
+        <button class="modal-close-btn">&times;</button>
+      </div>
+      <div class="modal-body">
+        <div id="notes-modal-list" style="margin-bottom:1.5rem; max-height:240px; overflow-y:auto;"></div>
+
+        <form id="add-note-form">
+          <div class="form-group">
+            <label for="new-note-input">Add Internal Follow-up Note</label>
+            <textarea class="form-control" id="new-note-input" rows="3" placeholder="e.g. Sent technical NDA to client, waiting for compliance review..." required></textarea>
+          </div>
+          <button type="submit" class="btn-cta-primary" style="width:100%; justify-content:center;">
+            Add Note
+          </button>
+        </form>
+      </div>
+    </div>
+  </div>
+
+  <div class="toast-container" id="toast-container"></div>
+
+  <!-- Scripts -->
+  <script src="js/default-data.js"></script>
+  <script src="js/client-storage.js"></script>
+  <script src="js/admin-cms.js"></script>
+  <script>
+    // Enforce authentication on admin page
+    const token = localStorage.getItem('bw_admin_token');
+    const user = JSON.parse(localStorage.getItem('bw_admin_user') || 'null');
+    if (!token || !user) {
+      window.location.href = 'login.html';
+    } else {
+      AdminCMS.init();
+    }
+
+    // Modal close global
+    document.querySelectorAll('.modal-close-btn').forEach(b => {
+      b.addEventListener('click', () => {
+        b.closest('.modal-overlay').classList.remove('open');
+      });
+    });
+    document.querySelectorAll('.modal-overlay').forEach(o => {
+      o.addEventListener('click', (e) => {
+        if (e.target === o) o.classList.remove('open');
+      });
+    });
+  </script>
+</body>
+</html>

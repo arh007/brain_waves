@@ -131,6 +131,9 @@
   <!-- Toast notification -->
   <div class="toast-container" id="toast-container"></div>
 
+  <!-- Scripts -->
+  <script src="js/default-data.js"></script>
+  <script src="js/client-storage.js"></script>
   <script>
     // Autofill button
     document.getElementById('autofill-btn').addEventListener('click', () => {
@@ -150,24 +153,48 @@
       btn.innerHTML = '<span>Authenticating...</span>';
 
       try {
-        const res = await fetch('/api/auth/login', {
-          method: 'POST',
-          headers: { 'Content-Type': 'application/json' },
-          body: JSON.stringify({ email, password })
-        });
+        let authSuccess = false;
+        let authUser = null;
+        let authToken = null;
 
-        const data = await res.json();
-        if (!res.ok) throw new Error(data.error || 'Login gagal.');
+        try {
+          const res = await fetch('/api/auth/login', {
+            method: 'POST',
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ email, password })
+          });
+          const data = await res.json();
+          if (res.ok) {
+            authSuccess = true;
+            authToken = data.token;
+            authUser = data.user;
+          }
+        } catch (apiErr) {
+          // Fallback to client storage (e.g. GitHub Pages)
+        }
+
+        if (!authSuccess && window.ClientStorage) {
+          const staticAuth = ClientStorage.login(email, password);
+          if (staticAuth.success) {
+            authSuccess = true;
+            authToken = staticAuth.token;
+            authUser = staticAuth.user;
+          } else {
+            throw new Error(staticAuth.error);
+          }
+        }
+
+        if (!authSuccess) throw new Error('Email atau password salah.');
 
         // Save token and user info
-        localStorage.setItem('bw_admin_token', data.token);
-        localStorage.setItem('bw_admin_user', JSON.stringify(data.user));
+        localStorage.setItem('bw_admin_token', authToken);
+        localStorage.setItem('bw_admin_user', JSON.stringify(authUser));
 
         showToast(`Login berhasil! Mengalihkan ke Control Center...`, 'success');
 
         setTimeout(() => {
-          window.location.href = '/admin';
-        }, 600);
+          window.location.href = 'admin.html';
+        }, 500);
 
       } catch (err) {
         showToast(err.message, 'danger');
