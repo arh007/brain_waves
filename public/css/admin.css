@@ -369,3 +369,117 @@
   color: var(--text-muted);
   font-family: var(--font-mono);
 }
+
+/* ========================================================
+   ADMIN CMS MOBILE RESPONSIVENESS (PHONES & TABLETS)
+   ======================================================== */
+@media (max-width: 860px) {
+  .admin-dashboard-layout {
+    flex-direction: column !important;
+    height: 100vh !important;
+    height: 100dvh !important;
+    overflow-y: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+  }
+
+  .admin-sidebar {
+    width: 100% !important;
+    height: auto !important;
+    border-right: none !important;
+    border-bottom: 1px solid var(--border-card) !important;
+    flex-shrink: 0 !important;
+  }
+
+  .admin-sidebar-header {
+    padding: 0.85rem 1rem !important;
+    justify-content: space-between !important;
+  }
+
+  .admin-sidebar-nav {
+    display: flex !important;
+    flex-direction: row !important;
+    overflow-x: auto !important;
+    white-space: nowrap !important;
+    -webkit-overflow-scrolling: touch !important;
+    padding: 0.5rem 0.75rem !important;
+    gap: 0.35rem !important;
+    scrollbar-width: none !important;
+  }
+
+  .admin-sidebar-nav::-webkit-scrollbar {
+    display: none !important;
+  }
+
+  .admin-nav-item button {
+    padding: 0.45rem 0.85rem !important;
+    font-size: 0.78rem !important;
+    border-radius: var(--radius-full) !important;
+    white-space: nowrap !important;
+  }
+
+  .admin-sidebar-footer {
+    display: none !important;
+  }
+
+  .admin-main-stage {
+    padding: 1rem !important;
+    width: 100% !important;
+    overflow-y: visible !important;
+  }
+
+  .admin-stage-header {
+    flex-direction: column !important;
+    align-items: flex-start !important;
+    gap: 0.75rem !important;
+    padding-bottom: 1rem !important;
+  }
+
+  .admin-stage-header > div:last-child {
+    width: 100% !important;
+    display: flex !important;
+    justify-content: space-between !important;
+    flex-wrap: wrap !important;
+    gap: 0.5rem !important;
+  }
+
+  .admin-kpi-grid {
+    grid-template-columns: 1fr 1fr !important;
+    gap: 0.65rem !important;
+  }
+
+  .kpi-card {
+    padding: 1rem !important;
+  }
+
+  .kpi-val {
+    font-size: 1.5rem !important;
+  }
+
+  /* Table responsiveness */
+  .admin-table-container,
+  .table-responsive {
+    width: 100% !important;
+    overflow-x: auto !important;
+    -webkit-overflow-scrolling: touch !important;
+    display: block !important;
+  }
+
+  .admin-table {
+    min-width: 550px !important;
+  }
+
+  /* Admin modals */
+  .modal-box {
+    width: 95vw !important;
+    max-width: 95vw !important;
+    max-height: 85vh !important;
+    max-height: 85dvh !important;
+    margin: auto !important;
+  }
+
+  .admin-login-card {
+    padding: 2rem 1.25rem !important;
+    margin: 1rem !important;
+    max-width: 95vw !important;
+  }
+}
