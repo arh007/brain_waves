@@ -1,2 +1,0 @@
-
-Tetapkan konfigurasi final PRD website BRAIN WAVES dengan gaya desain Neon Futuristic, cakupan Full Agency, level animasi Immersive 3D, teknologi Laravel + MySQL, dan AI Creative Assistant Phase 2. Lanjutkan dengan rancangan UI/UX lengkap per halaman, design system, spesifikasi teknis, arsitektur backend, skema database, serta acceptance criteria yang siap digunakan sebagai acuan pembangunan website.
